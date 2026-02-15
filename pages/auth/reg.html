@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,4 +88,95 @@
 <script src="/elements/UI.js"></script>
 <script src="/sw.js"></script>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eduventure - Join / Sign in</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/pages/auth/reg.css">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+    <div class="reg-card">
+        <form class="registration-form" novalidate>
+            <div class="logo-container">
+                <img src="/assets/logo.png" alt="Eduventure Logo">
+                <h2 id="form-title" style="margin: 0; font-size: 26px; font-weight: 700; color: #0f172a;">Create Account</h2>
+                <p id="form-desc" style="color: #475569; font-size: 14px; margin-top: 4px;">Use a username + password to join</p>
+            </div>
+
+            <div class="form-group" id="name-group">
+                <label>First & Last Name</label>
+                <div class="row-2">
+                    <div class="input-wrapper">
+                        <i data-lucide="user" class="input-icon"></i>
+                        <input type="text" id="first-name" name="firstName" placeholder="First name" autocomplete="given-name" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <i data-lucide="user" class="input-icon"></i>
+                        <input type="text" id="last-name" name="lastName" placeholder="Last name" autocomplete="family-name" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <div class="input-wrapper">
+                    <i data-lucide="at-sign" class="input-icon"></i>
+                    <input type="text" id="username" name="username" placeholder="e.g. khurshid102" autocomplete="username" required>
+                </div>
+            
+            </div>
+
+            <div class="form-group" id="phone-group">
+                <label for="phone">Phone Number (optional)</label>
+                <div class="input-wrapper">
+                    <i data-lucide="phone" class="input-icon"></i>
+                    <input type="tel" id="phone" name="phone" placeholder="e.g. +998 90 1234567" autocomplete="tel">
+                </div>
+            </div>
+
+            <div class="form-group" id="group-group">
+                <label for="group">Group</label>
+                <div class="input-wrapper">
+                    <i data-lucide="users" class="input-icon"></i>
+                    <input type="text" id="group" name="group" placeholder="Group A" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-wrapper">
+                    <i data-lucide="lock" class="input-icon"></i>
+                    <input type="password" id="password" name="password" placeholder="Min. 8 characters" minlength="8" autocomplete="current-password" required>
+                </div>
+            </div>
+
+            <button type="submit" id="submit-btn" class="reg-btn">Sign Up</button>
+
+            <p style="margin-top: 22px; text-align: center; font-size: 14px; color: #1e293b;">
+                <span id="toggle-text">Already have an account?</span>
+                <span id="loginBtn">Sign in</span>
+            </p>
+        </form>
+    </div>
+
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="https://ik.imagekit.io/Eduventure/animations/background_flowing_abstract_grey_and_white_blurred_waves_graphic.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <script type="module" src="/pages/auth/reg.page.js"></script>
+    <script>lucide.createIcons();</script>
+
+<script src="/elements/UI.js"></script>
+<script src="/sw.js"></script>
+</body>
+>>>>>>> 5190efbbfc004e7f2b1521b7378bb9023f978c2c
 </html>

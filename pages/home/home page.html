@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -255,3 +256,262 @@
 </html>
 
 
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/pages/elements/style.css">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="overlay" id="overlay"></div>
+    <div class="sidebar" id="sidebar">
+        <button class="sidebar-close" id="closeMenu">
+            <i data-lucide="x" size="32"></i>
+        </button>
+        <a href="/pages/home/home page.html" id="nav-active-page"><i data-lucide="home"></i><span>Home</span></a>
+        <a href="/pages/study_materials/study_materials.html"><i data-lucide="book-open"></i><span>Study Materials</span></a>
+        <a class="nav-a" href="/pages/chat/global.chat.html"><i data-lucide="messages-square"></i><span>Global Chat</span></a>
+        <a href="/pages/games/games.html"><i data-lucide="joystick"></i><span>Games</span></a>
+        <a href="/pages/challenges/weekly_challanges.html"><i data-lucide="star"></i><span>Weekly challanges</span></a>
+    </div>
+    
+    <header>
+        <div class="top-bar">
+            <div class="top-bar-left">
+                <div class="dot"></div>
+                <p>
+                    Free learning resources available | Student community support 24/7
+                </p>
+            </div>
+        </div>
+
+        <nav class="nav-main">
+            <div class="logo-section" onclick="location.href='/pages/home/home page.html'">
+                <img style="cursor: pointer;" src="/assets/logo.png" alt="icon" class="icon-box">
+                <div style="cursor: pointer;" class="logo-text">
+                    <h1><span style="color: #ffffff;">EDU</span><span style="color: #fbbf24;">VENTURE</span></h1>
+                    <p>PREMIUM LEARNING</p>
+                </div>
+            </div>
+
+            <div class="user-actions">
+                <a href="/pages/mark/remark.html" class="action-item cart">
+                    <i data-lucide="bookmark"></i>
+                    Saved
+                </a>
+                <a href="/pages/account/account.html" class="action-item cart">
+                    <i data-lucide="user"></i>
+                    Profile
+                </a>
+
+                <button class="mobile-hamburger" id="openMenu">
+                    <i data-lucide="menu" size="28"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div class="nav-bottom">
+            <a class="nav-a" id="nav-active-page" href="/pages/home/home page.html"><i data-lucide="home"></i><span>Home</span></a>            
+            <a class="nav-a" href="/pages/study_materials/study_materials.html"><i data-lucide="book-open"></i><span>Study Materials</span></a>
+            <a class="nav-a" href="/pages/chat/global.chat.html"><i data-lucide="messages-square"></i><span>Global Chat</span></a>
+            <a href="/pages/games/games.html"><i data-lucide="joystick"></i><span>Games</span></a>
+            <a class="nav-a" href="/pages/challenges/weekly_challanges.html"><i data-lucide="star"></i><span>Weekly challanges</span></a>
+        </div>
+    </header>
+    
+    <main class="hero">
+        <h2>Master Your<br>Learning Journey</h2>
+        
+        <p>Access premium study materials and expert-led courses. Join thousands of students achieving their academic goals.</p>
+
+        <div class="cta-group">
+            <a href="/pages/study_materials/study_materials.html" class="btn-white">
+                Browse Courses 
+                <i data-lucide="arrow-right" size="18"></i>
+            </a>
+            <a href="/pages/account/account.html" class="btn-outline">
+                <i data-lucide="line-chart" size="18"></i> 
+                Check progress
+            </a>
+        </div>
+    </main>
+    <main class="perks">
+        <div class="card-box">
+            <div class="card">
+                <div style="background: #1f2937; padding: 15px; border-radius: 12px; color: white; margin-bottom: 20px;">
+                    <i data-lucide="file-text"></i>
+                </div>
+                <h3 style="margin: 0 0 10px 0; font-size: 18px;">Study Materials</h3>
+                <p style="margin: 0; color: #6b7280; font-size: 14px;">Downloadable PDFs</p>
+            </div>
+
+            <div class="card">
+                <div style="background: #1f2937; padding: 15px; border-radius: 12px; color: white; margin-bottom: 20px;">
+                    <i data-lucide="award"></i>
+                </div>
+                <h3 style="margin: 0 0 10px 0; font-size: 18px;">Certificates</h3>
+                <p style="margin: 0; color: #6b7280; font-size: 14px;">Accredited completion</p>
+            </div>
+
+            <div class="card">
+                <div style="background: #1f2937; padding: 15px; border-radius: 12px; color: white; margin-bottom: 20px;">
+                    <i data-lucide="users"></i>
+                </div>
+                <h3 style="margin: 0 0 10px 0; font-size: 18px;">Community</h3>
+                <p style="margin: 0; color: #6b7280; font-size: 14px;">24/7 support forum</p>
+            </div>
+        </div>
+    </main>
+    <main class="quotes">
+        <div class="quotes-menu">
+            <div class="quote-container">
+                <div class="quote-icon">
+                    <i data-lucide="quote"></i>
+                </div>
+                <p class="quote"></p>
+                <div class="quote-controls">
+                    <button class="quote-btn" onclick="displayRandomQuote()">
+                        <i data-lucide="refresh-cw" size="16"></i>
+                        New Quote
+                    </button>
+                    <button class="quote-btn" onclick="shareQuote()">
+                        <i data-lucide="share-2" size="16"></i>
+                        Share
+                    </button>
+                </div>
+            </div>
+        </div>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTVmc25rOTNhNmVrZGViazk2dDl0NnIweDNkODVjYnlyM3htd3l6YiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/RemHbGtR3lNsqyERMS/giphy.gif" alt="Inspiration animation">
+    </main>
+    <main class="feature-section">
+        <h1 style="color: #0f172a; text-align: center;">Featured Courses</h1>
+        <p style="color: #6b7280; text-align: center; margin-bottom: 40px;">Start learning with our most popular courses</p>
+        
+        <div class="featured-box">
+            <div class="product-card" onclick="location.href='/pages/study_materials/reading.menu.page.html'">
+                <img src="https://ik.imagekit.io/Eduventure/pics/reading.webp" alt="Readings">
+                <div class="product-card-content">
+                    <h1 style="color: #0f172a; text-align: center;">Readings</h1>
+                </div>
+            </div>
+            <div class="product-card" onclick="location.href='/pages/study_materials/listening.menu.page.html'">
+                <img src="https://ik.imagekit.io/Eduventure/pics/listenings.webp" alt="listenings">
+                <div class="product-card-content">
+                    <h1 style="color: #0f172a; text-align: center;">Listenings</h1>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="location.href='/pages/study_materials/vocabularies.page.html'">
+                <img src="https://ik.imagekit.io/Eduventure/pics/vocabl.webp" alt="Vocabularies">
+                <div class="product-card-content">
+                    <h1 style="color: #0f172a; text-align: center;">Vocabularies</h1>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="location.href='#'">
+                <img src="https://ik.imagekit.io/Eduventure/pics/lessons.webp" alt="lessons">
+                <div class="product-card-content">
+                    <h1 style="color: #0f172a; text-align: center;">Lessons</h1>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section class="promo-banner">
+        <h1 style="color: #ffffff; text-align: center;">Learning Centers</h1>
+        <p style="color: #c5c5c5; text-align: center; margin-bottom: 40px;">Visit our physical locations for in-person workshops and study sessions</p>
+        
+        <div class="market-grid">
+            <div class="market-card">
+                <div class="market-image">
+                    <img src="/assets/pic2.webp" alt="Kokand Edu">
+                </div>
+                <div class="market-info">
+                    <h3>Kokand Educational center</h3>
+                    <p><i data-lucide="map-pin" size="14"></i> Turkiston street, Uzbekistan</p>
+                    <p><i data-lucide="clock" size="14"></i> 08:00 AM - 18:00 PM</p>
+                    <a class="view-btn" href="https://maps.app.goo.gl/qiUL5h1CHiap8Axf9" target="_blank">View Location</a>
+                </div>
+            </div>
+            <div class="market-card">
+                <div class="market-image">
+                    <img src="/assets/pict1.webp" alt="Kokand Edu">
+                </div>
+                <div class="market-info">
+                    <h3>Kokand Educational center</h3>
+                    <p><i data-lucide="map-pin" size="14"></i> Turkiston street, Uzbekistan</p>
+                    <p><i data-lucide="clock" size="14"></i> 08:00 AM - 18:00 PM</p>
+                    <a class="view-btn" target="_blank" href="https://maps.app.goo.gl/8x5QtxGgtE2nMVtt5">View Location</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-el">
+                <div class="footer-logo">
+                    <img src="/assets/logo.png" alt="icon" class="icon-box" style="width: 40px; height: 40px;">
+                    <h2><span style="color: #ffffff;">EDU</span><span style="color: #fbbf24;">VENTURE</span></h2>
+                </div>
+                <p>Empowering students globally with premium resources, expert-led courses, and a supportive learning community since 2024.</p>
+            </div>
+            
+            <div class="footer-holder">
+                <div class="footer-el">
+                    <h3>Explore</h3>
+                    <ul>
+                        <li><a href="/pages/study_materials/study_materials.html">Study Materials</a></li>
+                        <li><a href="/pages/challenges/weekly_challanges.html">Weekly Challenges</a></li>
+                        <li><a href="/pages/games/games.html">Games</a></li>
+                        <li><a href="/pages/chat/global.chat.html">Community Forum</a></li>
+                    </ul>
+                </div>
+                <div class="footer-el">
+                    <h3>Contact Us</h3>
+                    <div class="holder-footer-el">
+                        <div class="contact-item">
+                            <i data-lucide="phone" size="18"></i>
+                            <div>
+                                <strong>Student Support</strong>
+                                <p>+998 90 855 75 85</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i data-lucide="mail" size="18"></i>
+                            <div>
+                                <strong>Email</strong>
+                                <p><a href="mailto:kyuter789@gmail.com" class="email-link">kyuter789@gmail.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i data-lucide="send" size="18"></i>
+                            <div>
+                                <strong>telegram</strong>
+                                <p><a href="https://t.me/Hunters1ar" class="telegram">@Hunters1ar</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p style="text-align: center; font-size: small;">© 2026 Eduventure Learning. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="/pages/home/script.js"></script>
+    <script src="/elements/UI.js"></script>
+    <script src="/pages/elements/script.js"></script>
+    <script src="/script-internet-checker.js"></script>
+    <script type="module" src="/elements/firebase.js"></script>
+    <script src="/sw.js"></script>
+</body>
+</html>
+
+
+>>>>>>> 5190efbbfc004e7f2b1521b7378bb9023f978c2c

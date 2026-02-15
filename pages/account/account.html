@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -372,3 +373,379 @@
 </body>
 </html>
 
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - Eduventure English Learning</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/pages/elements/style.css">
+    <link rel="stylesheet" href="/pages/account/account.css">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="overlay" id="overlay"></div>
+    <div class="sidebar" id="sidebar">
+        <button class="sidebar-close" id="closeMenu">
+            <i data-lucide="x" size="32"></i>
+        </button>
+        <a href="/pages/home/home page.html" ><i data-lucide="home"></i><span>Home</span></a>
+        <a href="/pages/study_materials/study_materials.html"><i data-lucide="book-open"></i><span>Study Materials</span></a>
+        <a href="/pages/chat/global.chat.html"><i data-lucide="messages-square"></i><span>Global Chat</span></a>
+        <a href="/pages/games/games.html"><i data-lucide="joystick"></i><span>Games</span></a>
+        <a href="/pages/challenges/weekly_challanges.html"><i data-lucide="star"></i><span>Weekly challanges</span></a>
+    </div>
+    
+    <header>
+        <div class="top-bar">
+            <div class="top-bar-left">
+                <div class="dot"></div>
+                <p>
+                    Free learning resources available | Student community support 24/7
+                </p>
+            </div>
+        </div>
+
+        <nav class="nav-main">
+            <div class="logo-section" onclick="location.href='/pages/home/home page.html'">
+                <img style="cursor: pointer;" src="/assets/logo.png" alt="icon" class="icon-box">
+                <div style="cursor: pointer;" class="logo-text">
+                    <h1><span style="color: #ffffff;">EDU</span><span style="color: #fbbf24;">VENTURE</span></h1>
+                    <p>PREMIUM LEARNING</p>
+                </div>
+            </div>
+
+            <div class="user-actions">
+                <a href="/pages/mark/remark.html" class="action-item cart">
+                    <i data-lucide="bookmark"></i>
+                    Saved
+                </a>
+                <a href="/pages/account/account.html" class="action-item cart">
+                    <i data-lucide="user"></i>
+                    Profile
+                </a>
+
+                <button class="mobile-hamburger" id="openMenu">
+                    <i data-lucide="menu" size="28"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div class="nav-bottom">
+            <a class="nav-a"  href="/pages/home/home page.html"><i data-lucide="home"></i><span>Home</span></a>            
+            <a class="nav-a" href="/pages/study_materials/study_materials.html"><i data-lucide="book-open"></i><span>Study Materials</span></a>
+            <a class="nav-a" href="/pages/chat/global.chat.html"><i data-lucide="messages-square"></i><span>Global Chat</span></a>
+            <a class="nav-a" href="/pages/games/games.html"><i data-lucide="joystick"></i><span>Games</span></a>
+            <a class="nav-a" href="/pages/challenges/weekly_challanges.html"><i data-lucide="star"></i><span>Weekly challanges</span></a>
+        </div>
+    </header>
+
+    <div class="account-container">
+        <div class="account-grid">
+            <div class="account-sidebar">
+                <div class="user-profile">
+                    <div class="user-avatar" id="userAvatar"><i data-lucide="user"></i></div>
+                    <div class="user-details-compact">
+                        <h3 class="user-name" id="userName">Loading...</h3>
+                        <p class="user-email" id="userEmail">Loading....</p>
+                    </div>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <a href="#" class="nav-link active" data-section="overview">
+                        <i data-lucide="layout-dashboard" size="18"></i>
+                        <span>Overview</span>
+                    </a>
+                    <a href="#" class="nav-link" data-section="profile">
+                        <i data-lucide="user" size="18"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="#" class="nav-link" data-section="settings">
+                        <i data-lucide="settings" size="18"></i>
+                        <span>Settings</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="account-content">
+                <!-- Overview Section -->
+                <div class="content-section active" id="overview-section">
+                    <div class="section-header">
+                        <div>
+                            <h2 class="section-title">Learning Dashboard</h2>
+                            <p style="color: #6b7280; margin: 5px 0 0 0;">
+                                Welcome back, <span id="welcomeName"></span>! Keep practicing your English!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: #dbeafe; color: #1e40af;">
+                                <i data-lucide="book-open" size="24"></i>
+                            </div>
+                            <p class="stat-value" style="color: #1e40af;" id="readingsCompleted">...</p>
+                            <p class="stat-label">Readings Completed</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: #fee2e2; color: #dc2626;">
+                                <i data-lucide="headphones" size="24"></i>
+                            </div>
+                            <p class="stat-value" style="color: #dc2626;" id="listeningsCompleted">...</p>
+                            <p class="stat-label">Listenings Completed</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: #dcfce7; color: #16a34a;">
+                                <i data-lucide="presentation" size="24"></i>
+                            </div>
+                            <p class="stat-value" style="color: #16a34a;" id="lessonsCompleted">...</p>
+                            <p class="stat-label">Lessons Completed</p>
+                        </div>
+                    </div>
+                
+
+                    <div class="history-card">
+                        <div class="history-top">
+                            <div>
+                                <h3 class="history-title">History</h3>
+                                <p class="history-subtitle">Your latest activity (tests, vocab, and practice).</p>
+                            </div>
+
+                            <div class="history-controls">
+                                <select id="historyFilter" class="history-select" aria-label="Filter history">
+                                    <option value="all">All</option>
+                                    <option value="listenings">Listenings</option>
+                                    <option value="readings">Readings</option>
+                                    <option value="lessons">Lessons</option>
+                                    <option value="vocab">Vocabulary</option>
+                                </select>
+
+                                <button class="history-refresh" id="historyRefreshBtn" type="button" title="Refresh history">
+                                    <i data-lucide="refresh-cw" size="16"></i>
+                                    Refresh
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="historyList" class="history-list"></div>
+
+                        <div id="historyEmpty" class="empty-state" style="display:none;">
+                            <div class="empty-icon"><i data-lucide="activity" size="26"></i></div>
+                            <h4 class="empty-title">No history yet</h4>
+                            <p class="empty-text">Complete a test or learn some words and your activity will show up here.</p>
+                        </div>
+                    </div>
+
+</div>
+                <div class="content-section" id="profile-section">
+                    <div class="section-header">
+                        <h2 class="section-title">My Profile</h2>
+                        <button class="edit-btn" id="editProfileBtn">
+                            <i data-lucide="edit-2" size="16"></i>
+                            Edit Profile
+                        </button>
+                    </div>
+
+                    <div class="info-grid" id="profileView">
+                        <div class="info-item">
+                            <p class="info-label">Full Name</p>
+                            <p class="info-value" id="profileName">Alex Student</p>
+                        </div>
+                        <div class="info-item">
+                            <p class="info-label">Email Address</p>
+                            <p class="info-value" id="profileEmail">alex.student@eduventure.com</p>
+                        </div>
+                        <div class="info-item">
+                            <p class="info-label">Group</p>
+                            <p class="info-value" id="profileGroup">Ungrouped</p>
+                        </div>
+
+                        <div class="info-item">
+                            <p class="info-label">Phone Number</p>
+                            <p class="info-value" id="profilePhone">+1 (555) 123-4567</p>
+                        </div>
+                        <div class="info-item">
+                            <p class="info-label">Member Since</p>
+                            <p class="info-value" id="memberSince">September 2025</p>
+                        </div>
+                        <div class="info-item">
+                            <p class="info-label">Current Level</p>
+                            <p class="info-value">B2 - Upper Intermediate</p>
+                        </div>
+                        <div class="info-item">
+                            <p class="info-label">Learning Goal</p>
+                            <p class="info-value">To Fluency (C2)</p>
+                        </div>
+                    </div>
+
+                    <div id="profileEditForm" style="display: none;">
+                        <div class="form-group-account">
+                            <label>Full Name</label>
+                            <input type="text" id="editName" placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group-account">
+                            <label>Email Address</label>
+                            <input type="email" id="editEmail" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group-account">
+                            <label>Group</label>
+                            <input type="text" id="editGroup" placeholder="e.g. Group A">
+                        </div>
+
+                        <div class="form-group-account">
+                            <label>Phone Number</label>
+                            <input type="tel" id="editPhone" placeholder="Enter your phone number">
+                        </div>
+                        <div class="form-group-account">
+                            <label>Learning Goal</label>
+                            <select style="width: 100%; padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 16px;">
+                                <option>To Fluency (C2)</option>
+                                <option>Business English</option>
+                                <option>Travel & Tourism</option>
+                                <option>Academic English</option>
+                                <option>Conversation Skills</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap;">
+                            <button class="save-btn" id="saveProfileBtn">Save Changes</button>
+                            <button class="edit-btn" id="cancelEditBtn" style="background: #e5e7eb; color: #111827;">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Section -->
+                <div class="content-section" id="settings-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Account Settings</h2>
+                    </div>
+
+                    <h3 style="color: #111827; margin-bottom: 15px;">Notification Preferences</h3>
+                    <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; margin-bottom: 30px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
+                            <div>
+                                <p style="margin: 0 0 4px 0; color: #111827; font-weight: 600; font-size: 14px;">Daily Reminders</p>
+                                <p style="margin: 0; color: #6b7280; font-size: 13px;">Get reminded to practice English every day</p>
+                            </div>
+                            <input type="checkbox" checked style="width: 20px; height: 20px; cursor: pointer;">
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
+                            <div>
+                                <p style="margin: 0 0 4px 0; color: #111827; font-weight: 600; font-size: 14px;">Weekly Progress Report</p>
+                                <p style="margin: 0; color: #6b7280; font-size: 13px;">Receive your learning summary every week</p>
+                            </div>
+                            <input type="checkbox" checked style="width: 20px; height: 20px; cursor: pointer;">
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0;">
+                            <div>
+                                <p style="margin: 0 0 4px 0; color: #111827; font-weight: 600; font-size: 14px;">New Content Alerts</p>
+                                <p style="margin: 0; color: #6b7280; font-size: 13px;">Get notified when new materials are added</p>
+                            </div>
+                            <input type="checkbox" style="width: 20px; height: 20px; cursor: pointer;">
+                        </div>
+                    </div>
+
+                    <h3 style="color: #111827; margin-bottom: 15px;">Learning Preferences</h3>
+                    <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; margin-bottom: 30px;">
+                        <div class="form-group-account">
+                            <label>Daily Study Time Goal</label>
+                            <select style="width: 100%; padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 16px;">
+                                <option>30 minutes</option>
+                                <option>1 hour</option>
+                                <option selected>2 hours</option>
+                                <option>3 hours</option>
+                            </select>
+                        </div>
+                        <div class="form-group-account">
+                            <label>Difficulty Preference</label>
+                            <select style="width: 100%; padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 16px;">
+                                <option>Beginner</option>
+                                <option selected>Intermediate</option>
+                                <option>Advanced</option>
+                                <option>Mixed</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <h3 style="color: #111827; margin-bottom: 15px;">Security</h3>
+                    <div class="form-group-account">
+                        <label>Password</label>
+                        <input type="password" value="••••••••" disabled>
+                        <button class="edit-btn" id="changePasswordBtn" type="button" data-action="change-password" style="margin-top: 10px;">
+                            <i data-lucide="lock" size="16"></i>
+                            Change Password
+                        </button>
+                    </div>
+
+                    <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid #e5e7eb;">
+                        <button class="edit-btn" style="background: #ef4444;" onclick="handleLogout()">
+                            <i data-lucide="log-out" size="16"></i>
+                            Sign Out
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-el">
+                <div class="footer-logo">
+                    <img src="/assets/logo.png" alt="icon" class="icon-box" style="width: 40px; height: 40px;">
+                    <h2><span style="color: #ffffff;">EDU</span><span style="color: #fbbf24;">VENTURE</span></h2>
+                </div>
+                <p>Empowering students globally with premium resources, expert-led courses, and a supportive learning community since 2024.</p>
+            </div>
+            
+            <div class="footer-holder">
+                <div class="footer-el">
+                    <h3>Explore</h3>
+                    <ul>
+                        <li><a href="/pages/study_materials/study_materials.html">Study Materials</a></li>
+                        <li><a href="/pages/challenges/weekly_challanges.html">Weekly Challenges</a></li>
+                        <li><a href="/pages/games/games.html">Games</a></li>
+                        <li><a href="/pages/chat/global.chat.html">Community Forum</a></li>
+                    </ul>
+                </div>
+                <div class="footer-el">
+                    <h3>Contact Us</h3>
+                    <div class="holder-footer-el">
+                        <div class="contact-item">
+                            <i data-lucide="phone" size="18"></i>
+                            <div>
+                                <strong>Student Support</strong>
+                                <p>+998 90 855 75 85</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i data-lucide="mail" size="18"></i>
+                            <div>
+                                <strong>Email</strong>
+                                <p><a href="mailto:kyuter789@gmail.com" class="email-link">kyuter789@gmail.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i data-lucide="send" size="18"></i>
+                            <div>
+                                <strong>telegram</strong>
+                                <p><a href="https://t.me/Hunters1ar" class="telegram">@Hunters1ar</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p style="text-align: center; font-size: small;">© 2026 Eduventure Learning. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="/elements/UI.js"></script>
+    <script src="/pages/elements/script.js"></script>
+    <script type="module" src="/elements/firebase.js"></script>
+    <script type="module" src="account.page.js"></script>
+<script src="/sw.js"></script>
+</body>
+</html>
+
+>>>>>>> 5190efbbfc004e7f2b1521b7378bb9023f978c2c

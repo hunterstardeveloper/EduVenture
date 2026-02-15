@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -169,4 +170,177 @@
 <script src="/elements/UI.js"></script>
 <script src="/sw.js"></script>
 </body>
+=======
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Listening Practice – Part 1 (Section 2)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="/elements/listening.css">
+  <style>
+    /* Specific overrides for Part 2 dropdowns to match the index.html input style */
+    select {
+      padding: 14px 20px;
+      border: 2px solid var(--bg-light);
+      border-radius: 12px;
+      background: var(--bg-light);
+      font-size: 16px;
+      font-weight: 600;
+      width: 100%;
+      max-width: 400px;
+      color: var(--primary-dark);
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+    }
+    select:focus {
+      background: white;
+      border-color: var(--accent-blue);
+    }
+    .options-box {
+      border: 2px solid var(--border);
+      padding: 25px;
+      background: var(--bg-light);
+      border-radius: 16px;
+      margin: 20px 0;
+    }
+    .question-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+  </style>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+  <header>
+    <div class="top-bar">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <i data-lucide="headphones" size="16"></i> LISTENING PRACTICE PLATFORM
+      </div>
+      <div>PART 1: SECTION 2</div>
+    </div>
+    <div class="nav-main">
+      <div class="logo-text"><h1>EDU : LISTENING</h1></div>
+      <div>
+        <audio id="audio" src="https://ik.imagekit.io/Eduventure/pics/my%20listenings/test1/PART%202.mp3?updatedAt=1771123921683" preload="auto"></audio>
+        <button class="play-btn" id="masterPlayBtn" onclick="togglePlay()">
+          <i id="playIcon" data-lucide="play-circle"></i> 
+          <span id="btnText">Play Section 2</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="section">
+    <div class="card">
+      <h2>Canadian Festival Theater</h2>
+      
+      <div style="max-width: 850px; margin: 0 auto;">
+        <p style="color: var(--text-muted); font-weight: 600;">Questions 11 - 14: Choose the correct letter, A, B, or C.</p>
+        
+        <div class="question-block">
+          <h4>11. What special offer is there for regular theatre-goers?</h4>
+          <select id="q11">
+            <option value="">-- Choose Option --</option>
+            <option value="A">A. They can see a second play at a reduced price.</option>
+            <option value="B">B. They can buy two tickets and get two free.</option>
+            <option value="C">C. They can get a discount on Mondays.</option>
+          </select>
+
+          <h4>12. What information is given about the study guides?</h4>
+          <select id="q12">
+            <option value="">-- Choose Option --</option>
+            <option value="A">A. They are handed out at the theatre.</option>
+            <option value="B">B. They provide information on the actors.</option>
+            <option value="C">C. They give ideas for discussion.</option>
+          </select>
+
+          <h4>13. What information is given about the 'Bring a friend' special?</h4>
+          <select id="q13">
+            <option value="">-- Choose Option --</option>
+            <option value="A">A. It is only for those over 65.</option>
+            <option value="B">B. It applies to a number of productions.</option>
+            <option value="C">C. It includes a 5% reduction on gifts.</option>
+          </select>
+
+          <h4>14. What does Michael say about the actor Christopher Plunket?</h4>
+          <select id="q14">
+            <option value="">-- Choose Option --</option>
+            <option value="A">A. He may retire from acting soon.</option>
+            <option value="B">B. He writes his own plays.</option>
+            <option value="C">C. He prefers acting in films to performing live.</option>
+          </select>
+        </div>
+
+        <hr style="margin: 50px 0; border: 0; border-top: 1px solid var(--border);">
+
+        <p style="color: var(--text-muted); font-weight: 600;">Questions 15 - 20: What is the main theme of each musical?</p>
+        
+        <div class="options-box">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 15px;">
+            <div><strong>A.</strong> living in a different century</div>
+            <div><strong>E.</strong> experiencing disappointment</div>
+            <div><strong>B.</strong> managing to achieve success</div>
+            <div><strong>F.</strong> living in a magical place</div>
+            <div><strong>C.</strong> ageing slowly</div>
+            <div><strong>G.</strong> overcoming poverty</div>
+            <div><strong>D.</strong> growing up</div>
+            <div><strong>H.</strong> handling conflict</div>
+          </div>
+        </div>
+
+        <div class="question-row"><span><strong>15.</strong> The Climb</span> <input type="text" id="q15" placeholder="A-H"></div>
+        <div class="question-row"><span><strong>16.</strong> The Voyagers</span> <input type="text" id="q16" placeholder="A-H"></div>
+        <div class="question-row"><span><strong>17.</strong> Joey Brown</span> <input type="text" id="q17" placeholder="A-H"></div>
+        <div class="question-row"><span><strong>18.</strong> Main Street</span> <input type="text" id="q18" placeholder="A-H"></div>
+        <div class="question-row"><span><strong>19.</strong> Millie and Mike</span> <input type="text" id="q19" placeholder="A-H"></div>
+        <div class="question-row"><span><strong>20.</strong> Windswept</span> <input type="text" id="q20" placeholder="A-H"></div>
+      </div>
+
+      <div id="resultBox"></div>
+
+      <div class="action-group">
+        <a href="/listenings/test1/sec1/part1.html" style="text-decoration: none;">
+            <button class="btn-main btn-outline">
+                <i data-lucide="arrow-left"></i> Previous Part
+            </button>
+        </a>
+        <button class="btn-main" onclick="checkAnswers()">
+          <i data-lucide="check-circle"></i> Submit Answers
+        </button>
+        <a href="/listenings/test1/sec3/part3.html" style="text-decoration: none;">
+          <button class="btn-main btn-outline">
+            Next Part <i data-lucide="arrow-right"></i>
+          </button>
+        </a>
+      </div>
+      
+      <div style="text-align: center;">
+        <button id="downloadPdfBtn" onclick="downloadPDF()">
+          <i data-lucide="file-text"></i> Download Result Certificate (PDF)
+        </button>
+      </div>
+      
+      <div id="resetStatsBtn">
+        <button class="btn-reset" onclick="resetStats()">
+          <i data-lucide="trash-2" size="16"></i> Clear All Data & Reset Stats
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/elements/audio.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script type="module" src="/elements/listening.js"></script>
+<script src="/elements/UI.js"></script>
+<script src="/sw.js"></script>
+</body>
+>>>>>>> 5190efbbfc004e7f2b1521b7378bb9023f978c2c
 </html>
