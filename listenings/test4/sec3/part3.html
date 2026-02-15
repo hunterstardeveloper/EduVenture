@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Listening Practice – Section 3</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="/elements/listening.css">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+  <header>
+    <div class="top-bar">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <i data-lucide="headphones" size="16"></i> LISTENING PRACTICE PLATFORM
+      </div>
+      <div>PART 3: SECTION 3</div>
+    </div>
+    <div class="nav-main">
+      <div class="logo-text"><h1>EDU : LISTENING</h1></div>
+      <div>
+        <audio id="audio" src="/elements/listenings/test4/P3 (2).mp3" preload="auto"></audio>
+        <button class="play-btn" id="masterPlayBtn" onclick="togglePlay()">
+          <i id="playIcon" data-lucide="play-circle"></i> 
+          <span id="btnText">Play Audio</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="section">
+    <div class="card">
+      <h2>Research on absence from work</h2>
+      
+      <div style="max-width: 850px; margin: 0 auto;">
+        
+        <p style="margin-top: 0;">
+          <strong>Section 3. Questions 21 - 24</strong><br>
+          Choose the correct letter, <strong>A, B, or C.</strong>
+        </p>
+
+        <div class="mcq-group" style="margin-bottom: 24px;">
+           <p><strong>21.</strong> Laura chose Burcock Engineering for her research because</p>
+           <div class="options-container">
+             <label class="option-item">
+               <input type="radio" name="q21" value="A">
+               <span>A. she was contacted by the managing director.</span>
+             </label>
+             <label class="option-item">
+               <input type="radio" name="q21" value="B">
+               <span>B. she knew several people who worked there.</span>
+             </label>
+             <label class="option-item">
+               <input type="radio" name="q21" value="C">
+               <span>C. she had already done a work placement there.</span>
+             </label>
+           </div>
+        </div>
+
+        <div class="mcq-group" style="margin-bottom: 24px;">
+           <p><strong>22.</strong> What does Laura agree to do regarding the central theme of her research?</p>
+           <div class="options-container">
+             <label class="option-item">
+               <input type="radio" name="q22" value="A">
+               <span>A. check it is relevant</span>
+             </label>
+             <label class="option-item">
+               <input type="radio" name="q22" value="B">
+               <span>B. broaden the focus.</span>
+             </label>
+             <label class="option-item">
+               <input type="radio" name="q22" value="C">
+               <span>C. be more specific in her aims.</span>
+             </label>
+           </div>
+        </div>
+
+        <div class="mcq-group" style="margin-bottom: 24px;">
+           <p><strong>23.</strong> What does Laura expect to find from her research?</p>
+           <div class="options-container">
+             <label class="option-item">
+               <input type="radio" name="q23" value="A">
+               <span>A. Absence rates are related to the type of work done.</span>
+             </label>
+             <label class="option-item">
+               <input type="radio" name="q23" value="B">
+               <span>B. A lot of worker absence is actually unnecessary.</span>
+             </label>
+             <label class="option-item">
+               <input type="radio" name="q23" value="C">
+               <span>C. Employee absence rates are increasing.</span>
+             </label>
+           </div>
+        </div>
+
+        <div class="mcq-group" style="margin-bottom: 24px;">
+           <p><strong>24.</strong> What employee information does the tutor think Laura will be able to obtain from company records?</p>
+           <div class="options-container">
+             <label class="option-item">
+               <input type="radio" name="q24" value="A">
+               <span>A. dates of birth.</span>
+             </label>
+             <label class="option-item">
+               <input type="radio" name="q24" value="B">
+               <span>B. details of employment.</span>
+             </label>
+             <label class="option-item">
+               <input type="radio" name="q24" value="C">
+               <span>C. individual records of absence.</span>
+             </label>
+           </div>
+        </div>
+
+        <hr style="margin: 30px 0; border: 0; border-top: 1px solid #e2e8f0;">
+
+        <h4><i data-lucide="clipboard-list" size="18"></i> Questionnaire Recommendations</h4>
+        <p>Which <strong>TWO</strong> recommendations does the tutor make about Laura's questionnaire?</p>
+        
+        <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 15px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div><strong>A.</strong> Leave a space for contact details.</div>
+                <div><strong>B.</strong> Specify a completion date.</div>
+                <div><strong>C.</strong> Provide a mixture of question types.</div>
+                <div><strong>D.</strong> Keep the length to a minimum.</div>
+                <div><strong>E.</strong> Trial it on someone before finalising it.</div>
+            </div>
+        </div>
+        
+        <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+             <label><strong>25.</strong> <input type="text" id="q25" placeholder="A-E" style="width: 60px; text-align: center;"></label>
+             <label><strong>26.</strong> <input type="text" id="q26" placeholder="A-E" style="width: 60px; text-align: center;"></label>
+        </div>
+
+        <h4><i data-lucide="mail" size="18"></i> Covering Letter</h4>
+        <p>Which <strong>TWO</strong> things will Laura explain in her covering letter to participants?</p>
+        
+        <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 15px;">
+            <div style="display: grid; grid-template-columns: 1fr; gap: 8px;">
+                <div><strong>A.</strong> when the questionnaire should be completed</div>
+                <div><strong>B.</strong> the fact that participation in the survey is voluntary</div>
+                <div><strong>C.</strong> how long the questionnaire is likely to take</div>
+                <div><strong>D.</strong> the purpose of the survey</div>
+                <div><strong>E.</strong> the benefits of participation in the survey</div>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+             <label><strong>27.</strong> <input type="text" id="q27" placeholder="A-E" style="width: 60px; text-align: center;"></label>
+             <label><strong>28.</strong> <input type="text" id="q28" placeholder="A-E" style="width: 60px; text-align: center;"></label>
+        </div>
+
+        <h4><i data-lucide="calendar" size="18"></i> Definite Dates</h4>
+        <p>Which <strong>TWO</strong> activities does Laura already have definite dates for?</p>
+        
+        <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 15px;">
+            <div style="display: grid; grid-template-columns: 1fr; gap: 8px;">
+                <div><strong>A.</strong> completion of her finished assignment</div>
+                <div><strong>B.</strong> questionnaire distribution</div>
+                <div><strong>C.</strong> collection of completed questionnaires</div>
+                <div><strong>D.</strong> the next meeting with her tutor</div>
+                <div><strong>E.</strong> analysis of figures from the company’s database</div>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+             <label><strong>29.</strong> <input type="text" id="q29" placeholder="A-E" style="width: 60px; text-align: center;"></label>
+             <label><strong>30.</strong> <input type="text" id="q30" placeholder="A-E" style="width: 60px; text-align: center;"></label>
+        </div>
+
+      </div>
+
+      <div id="resultBox"></div>
+
+      <div class="action-group">
+        <a href="/listenings/test4/sec2/part2.html" style="text-decoration: none;">
+             <button class="btn-main btn-outline">
+               <i data-lucide="arrow-left"></i> Previous
+             </button>
+        </a>
+        <button class="btn-main" onclick="checkAnswers()">
+          <i data-lucide="check-circle"></i> Submit Answers
+        </button>
+        <a href="/listenings/test4/sec4/part4.html" style="text-decoration: none;">
+          <button class="btn-main btn-outline">
+            Next Part <i data-lucide="arrow-right"></i>
+          </button>
+        </a>
+      </div>
+      
+      <div style="text-align: center;">
+        <button id="downloadPdfBtn" onclick="downloadPDF()">
+          <i data-lucide="file-text"></i> Download Result Certificate (PDF)
+        </button>
+      </div>
+      
+      <div id="resetStatsBtn">
+        <button class="btn-reset" onclick="resetStats()">
+          <i data-lucide="trash-2" size="16"></i> Clear All Data & Reset Stats
+        </button>
+      </div>
+    </div>
+  </div>
+  <script src="/elements/audio.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script type="module" src="/elements/listening.js"></script>
+  <script src="/elements/UI.js"></script>
+  <script src="/sw.js"></script>
+</body>
+</html>

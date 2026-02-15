@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Listening Practice – Part 2 (Section 2)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="/elements/listening.css">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+  <style>
+    select{
+      width: 100%;
+      max-width: 680px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,.18);
+      font-size: 16px;
+      margin: 6px 0 14px;
+      background: rgba(255,255,255,.9);
+    }
+    /* keep text answers compact when author set width inline */
+    input[type="text"]{
+      max-width: 100%;
+    }
+    .question-block{ max-width: 900px; margin: 0 auto; }
+    .question-block h4{ margin-top: 24px; }
+  </style>
+
+</head>
+<body>
+
+  <header>
+    <div class="top-bar">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <i data-lucide="headphones" size="16"></i> LISTENING PRACTICE PLATFORM
+      </div>
+      <div>PART 1: SECTION 2</div>
+    </div>
+
+    <div class="nav-main">
+      <div class="logo-text"><h1>EDU : LISTENING</h1></div>
+      <div>
+        <audio id="audio" src="https://ik.imagekit.io/Eduventure/pics/my%20listenings/test3/P2.mp3" preload="auto"></audio>
+        <button class="play-btn" id="masterPlayBtn" onclick="togglePlay()">
+          <i id="playIcon" data-lucide="play-circle"></i>
+          <span id="btnText">Play Audio</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="section">
+    <div class="card">
+      <h2>Part 2 (Questions 11–20)</h2>
+
+      <div class="question-block">
+<strong>PART 2. Questions 11 - 20</strong>
+    <p>Questions 11 - 16</p>
+    <p>Choose the correct letter, <strong>A, B, or C.</strong></p>
+      <p><strong>11.</strong>What is the most important attitude towards making mistakes according to Arthur? </p>
+      <select id="q11">
+        <option value="">-- Choose --</option>
+        <option value="A">A. Mistakes are inevitable. </option>
+        <option value="B">B. Mistakes can be a chance to learn .</option>
+        <option value="C">C. Mistakes can cause serious consequences.</option>
+      </select>
+      <p><strong>12.</strong> What's true about self-confidence according to Arthur?</p>
+      <select id="q12">
+        <option value="">-- Choose --</option>
+        <option value="A">A. self-confidence sometimes leads to failure </option>
+        <option value="B">B. It means being ambitious with what you do.</option>
+        <option value="C">C. Self-confidence can be gained through reading </option>
+      </select>
+      <p><strong>13.</strong>What advice does Arthur give to new business leaders?</p>
+      <select id="q13">
+        <option value="">-- Choose --</option>
+        <option value="A">A. Read business journals </option>
+        <option value="B">B. try new things </option>
+        <option value="C">C. Keep their aims</option>
+      </select>
+      <p><strong>14.</strong>How does Arthur deal with difficult problems?</p>
+      <select id="q14">
+        <option value="">-- Choose --</option>
+        <option value="A">A. Ask for advice from friends .</option>
+        <option value="B">B. Seek help from experts .  </option>
+        <option value="C">C. Try to get advice from books  </option>
+      </select>
+      <p><strong>15.</strong>What's the common quality of leaders? </p>
+      <select id="q15">
+        <option value="">-- Choose --</option>
+        <option value="A">A. Have good public speaking skills</option>
+        <option value="B">B. Solve all problems skillfully .</option>
+        <option value="C">C. be respected by the workforce .</option>
+      </select>
+      <p><strong>16.</strong> How should companies take risks? </p>
+      <select id="q16">
+        <option value="">-- Choose --</option>
+        <option value="A">A. deal with them carefully .</option>
+        <option value="B">B. be financially advantageous</option>
+        <option value="C">C. think in the long run </option>
+      </select>
+      <p>Questions 17 - 18</p>
+      <p>Choose <strong>TWO</strong> letters , <strong>A-E</strong></p>
+       <p>Which <strong>TWO</strong> factors are important when starting a business? </p>
+      <div style="border: 1px solid black; padding: 10px; background: white; border-radius: 10px;">
+        <p><strong>A. </strong>fix realistic prices</p>
+        <p><strong>B. </strong>create products better than the competitors' </p>
+        <p><strong>C. </strong>be committed </p>
+        <p><strong>D. </strong>pay attention to detail </p>
+        <p><strong>E. </strong>apply complete strategy</p>
+      </div>
+      <p>
+        <strong>17.</strong> <input type="text" id="q17" style="width: 150px; display: inline;" placeholder="A-E"> .
+      </p>
+      <p>
+        <strong>18.</strong><input type="text" id="q18" style="width: 150px; display: inline;" placeholder="A-E"> .
+      </p>
+      <p>Questions 19 - 20</p>
+      <p>Choose <strong>TWO</strong> letters , <strong>A-E</strong></p>
+       <p>Which <strong>TWO</strong> kinds of support are important for Arthur? </p>
+      <div style="border: 1px solid black; padding: 10px; background: white; border-radius: 10px;">
+        <p><strong>A. </strong>family support</p>
+        <p><strong>B. </strong>good business advice with new ideas</p>
+        <p><strong>C. </strong>support of the bank loan  </p>
+        <p><strong>D. </strong>friends' support </p>
+        <p><strong>E. </strong>governmental funding</p>
+      </div>
+      <p>
+        <strong>19.</strong> <input type="text" id="q19" style="width: 150px; display: inline;" placeholder="A-E"> .
+      </p>
+      <p>
+        <strong>20.</strong><input type="text" id="q20" style="width: 150px; display: inline;" placeholder="A-E"> .
+      </p>
+
+    </div>
+      </div>
+
+      <div id="resultBox"></div>
+
+      <div class="action-group">
+        
+        <a href="/listenings/test3/sec1/part1.html" style="text-decoration:none;">
+          <button class="btn-main btn-outline"><i data-lucide="arrow-left"></i> Previous Part</button>
+        </a>
+        <button class="btn-main" onclick="checkAnswers()">
+          <i data-lucide="check-circle"></i> Submit Answers
+        </button>
+        
+        <a href="/listenings/test3/sec3/part3.html" style="text-decoration:none;">
+          <button class="btn-main btn-outline">Next Part <i data-lucide="arrow-right"></i></button>
+        </a>
+      </div>
+
+
+      <div style="text-align:center;">
+        <button id="downloadPdfBtn" onclick="downloadPDF()" style="display:none;">
+          <i data-lucide="file-text"></i> Download Result Certificate (PDF)
+        </button>
+      </div>
+
+
+      <div id="resetStatsBtn" style="display:none;">
+        <button class="btn-reset" onclick="resetStats()">
+          <i data-lucide="trash-2" size="16"></i> Reset Stats
+        </button>
+      </div>
+
+
+    </div>
+  </div>
+
+  
+  <script>
+    // Polyfill for older pages that used playClip(startSeconds, endSeconds)
+    window.playClip = window.playClip || function(startSeconds = 0, endSeconds = null) {
+      const audio = document.getElementById('audio');
+      if (!audio) return;
+      try {
+        audio.currentTime = Number(startSeconds) || 0;
+      } catch (e) {}
+      audio.play?.();
+      if (endSeconds !== null && endSeconds !== undefined && endSeconds !== "" && !Number.isNaN(Number(endSeconds))) {
+        const end = Number(endSeconds);
+        const ms = Math.max(0, (end - audio.currentTime) * 1000);
+        if (window.__clipTimer) clearTimeout(window.__clipTimer);
+        window.__clipTimer = setTimeout(() => { audio.pause?.(); }, ms);
+      }
+    };
+  </script>
+
+  <script src="/elements/audio.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script type="module" src="/elements/listening.js"></script>
+  <script src="/elements/UI.js"></script>
+  <script src="/sw.js"></script>
+</body>
+</html>
