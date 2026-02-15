@@ -793,75 +793,61 @@ header {
 
 /* Footer */
 footer {
-    background: #0f172a;
-    color: white;
-    padding: 60px 5% 20px;
-}
-
-.footer-container {
-    display: grid;
-    grid-template-columns: 1.5fr 2fr;
-    gap: 60px;
-    margin-bottom: 40px;
-}
-
-.footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-.footer-logo h2 {
-    margin: 0;
-    font-size: 24px;
-}
-
-.footer-el p {
-    color: #9ca3af;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
-.social-links {
-    display: flex;
-    gap: 12px;
-}
-
-.social-links a {
-    background: rgba(255, 255, 255, 0.1);
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    transition: all 0.3s;
-}
-
-.social-links a:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-footer {
     background-color: #111827;
     color: #9ca3af;
-    padding: 80px 5% 40px 5%;
+    padding: 72px 6% 0;
     margin-top: 60px;
 }
 
 .footer-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
     max-width: 1400px;
     margin: 0 auto;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .footer-holder {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 40px;
+}
+
+.holder-footer-el {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.contact-item svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #fbbf24;
+}
+
+.contact-item div strong {
+    display: block;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.contact-item div p {
+    margin: 0 0 2px 0 !important;
+    font-size: 14px;
+    color: #9ca3af;
+    line-height: 1.5;
 }
 
 .footer-el h2 {
@@ -876,30 +862,81 @@ footer {
 
 .footer-el h3 {
     color: white;
-    font-size: 18px;
-    margin-bottom: 25px;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 22px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #fbbf24;
+    display: inline-block;
 }
 
 .footer-logo {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
-.footer-el p {
-    line-height: 1.6;
+.footer-el > p {
+    line-height: 1.7;
     font-size: 14px;
-    margin-bottom: 25px;
+    color: #9ca3af;
+    max-width: 300px;
 }
 
 .footer-el ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .footer-el ul li {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+}
+
+.footer-el ul li a {
+    color: #9ca3af;
+    text-decoration: none;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    padding-bottom: 2px;
+    transition: color 0.25s;
+}
+
+.footer-el ul li a::before {
+    content: '›';
+    color: #fbbf24;
+    font-size: 16px;
+    line-height: 1;
+    transition: transform 0.25s;
+}
+
+.footer-el ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: #fbbf24;
+    transition: width 0.3s ease;
+}
+
+.footer-el ul li a:hover {
+    color: white;
+}
+
+.footer-el ul li a:hover::before {
+    transform: translateX(3px);
+}
+
+.footer-el ul li a:hover::after {
+    width: 100%;
 }
 
 .footer-el a {
@@ -913,12 +950,51 @@ footer {
     color: white;
 }
 
+.email-link, .telegram {
+    color: #9ca3af;
+    text-decoration: none;
+    transition: color 0.25s;
+    position: relative;
+    padding-bottom: 2px;
+    display: inline-block;
+}
+
+.email-link::after, .telegram::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: #fbbf24;
+    transition: width 0.3s ease;
+}
+
+.email-link:hover, .telegram:hover {
+    color: #fbbf24;
+}
+
+.email-link:hover::after, .telegram:hover::after {
+    width: 100%;
+}
+
 .gif-video {
     width: 100%;
     max-width: 400px;
     height: auto;
     display: block;
     margin: 0 auto;
+}
+
+.footer-bottom {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 13px;
+    color: #4b5563;
 }
 
 
@@ -988,6 +1064,11 @@ footer {
         flex-direction: column;
         gap: 20px;
         text-align: center;
+    }
+
+    .footer-holder {
+        grid-template-columns: 1fr;
+        gap: 32px;
     }
     
     .footer-links {
