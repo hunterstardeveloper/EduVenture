@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Listening Practice – Part 3</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="/elements/listening.css">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+  <header>
+    <div class="top-bar">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <i data-lucide="headphones" size="16"></i> LISTENING PRACTICE PLATFORM
+      </div>
+      <div>PART 3: TEST 2</div>
+    </div>
+    <div class="nav-main">
+      <div class="logo-text"><h1>EDU : LISTENING</h1></div>
+      <div>
+        <audio id="audio" src="https://ik.imagekit.io/Eduventure/pics/my%20listenings/test2/DAY%202%20section3.mp3?updatedAt=1771123997744" preload="auto"></audio>
+        <button class="play-btn" id="masterPlayBtn" onclick="togglePlay()">
+          <i id="playIcon" data-lucide="play-circle"></i> 
+          <span id="btnText">Play Section 3</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="section">
+    <div class="card">
+      <h2>Education House Design</h2>
+
+      <div class="content-area">
+        <div class="instruction-text">
+          <strong>PART 3. Questions 21 - 30</strong><br>
+          <p>Questions 21 - 26: Label the diagram. Choose <strong>SIX</strong> answers from the box (A-I).</p>
+          <p>Questions 27 - 30: Choose the correct letter, <strong>A, B, or C.</strong></p>
+        </div>
+
+        <div class="question-block">
+          <h3><i data-lucide="layout" size="20"></i> Diagram Labelling</h3>
+          <div class="options-box">
+            <p><strong>A.</strong> fresh air is removed</p>
+            <p><strong>B.</strong> fresh air is pulled in</p>
+            <p><strong>C.</strong> heat loss is reduced</p>
+            <p><strong>D.</strong> rainwater is checked</p>
+            <p><strong>E.</strong> rainwater is used</p>
+            <p><strong>F.</strong> old air is removed</p>
+            <p><strong>G.</strong> temperature is checked</p>
+            <p><strong>H.</strong> water temperature is reduced</p>
+            <p><strong>I.</strong> water is stored</p>
+          </div>
+
+          <div class="diagram-container">
+            <img src="pic 1.png" alt="Education House Diagram">
+          </div>
+
+          <div class="input-row"><strong>21.</strong> Cooling Tower: <input type="text" id="q21" placeholder="A-I" style="width: 100px;"></div>
+          <div class="input-row"><strong>22.</strong> Weather station: <input type="text" id="q22" placeholder="A-I" style="width: 100px;"></div>
+          <div class="input-row"><strong>23.</strong> Shower Tower: <input type="text" id="q23" placeholder="A-I" style="width: 100px;"></div>
+          <div class="input-row"><strong>24.</strong> Tank: <input type="text" id="q24" placeholder="A-I" style="width: 100px;"></div>
+          <div class="input-row"><strong>25.</strong> Balcony: <input type="text" id="q25" placeholder="A-I" style="width: 100px;"></div>
+          <div class="input-row"><strong>26.</strong> Windows: <input type="text" id="q26" placeholder="A-I" style="width: 100px;"></div>
+        </div>
+
+        <div class="question-block">
+          <h3><i data-lucide="message-square" size="20"></i> Questions 27 - 30</h3>
+          
+          <p><strong>27.</strong> What do John and Debbie think will surprise visitors to the Education House building?</p>
+          <select id="q27">
+            <option value="">-- Choose --</option>
+            <option value="A">A. how high the building is.</option>
+            <option value="B">B. where the main entrance is.</option>
+            <option value="C">C. what is on the outside walls .</option>
+          </select>
+
+          <p><strong>28.</strong> What is their reaction to the findings on staff productivity in the building?</p>
+          <select id="q28">
+            <option value="">-- Choose --</option>
+            <option value="A">A. They think the findings are predictable.</option>
+            <option value="B">B. They believe more research should be done.</option>
+            <option value="C">C. They suggest the findings are reported in the media.</option>
+          </select>
+
+          <p><strong>29.</strong> What do they think about the "edge space" in the building?</p>
+          <select id="q29">
+            <option value="">-- Choose --</option>
+            <option value="A">A. It might be unpopular with staff.</option>
+            <option value="B">B. It is surprising part of the design.</option>
+            <option value="C">C. It is an area for managers.</option>
+          </select>
+
+          <p><strong>30.</strong> What could be a problem for the building's water system?</p>
+          <select id="q30">
+            <option value="">-- Choose --</option>
+            <option value="A">A. the reaction of the staff.</option>
+            <option value="B">B. the completion date.</option>
+            <option value="C">C. the possible health hazards.</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="resultBox"></div>
+
+      <div class="action-group">
+        <a href="/listenings/test2/sec2/part2.html" style="text-decoration: none;">
+          <button class="btn-main btn-outline">
+            <i data-lucide="arrow-left"></i> Previous Part
+          </button>
+        </a>
+        <button class="btn-main" onclick="checkAnswers()">
+          <i data-lucide="check-circle"></i> Submit
+        </button>
+        <a href="/listenings/test2/sec4/part4.html" style="text-decoration: none;">
+          <button class="btn-main btn-outline">
+            Next Part <i data-lucide="arrow-right"></i>
+          </button>
+        </a>
+      </div>
+      
+      <div style="text-align: center;">
+        <button id="downloadPdfBtn" onclick="downloadPDF()">
+          <i data-lucide="file-text"></i> Download PDF
+        </button>
+      </div>
+      
+      <div id="resetStatsBtn">
+        <button class="btn-reset" onclick="resetStats()">
+          <i data-lucide="trash-2" size="16"></i> Reset Stats
+        </button>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script type="module" src="/elements/listening.js"></script>
+  <script src="/elements/audio.js"></script>
+
+<script src="/elements/UI.js"></script>
+<script src="/sw.js"></script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reading Practice — Passage 1 (T/F/NG + Short Answers)</title>
+  <link rel="stylesheet" href="/elements/reading.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <button class="lofi-toggle" onclick="toggleLofi()">🎵 Chill Mode</button>
+    <button class="lofi-toggle" onclick="location.href='/reading/test2/pass2/pass2.html'">Next passage</button>
+  </nav>
+
+  <audio id="lofiMusic" loop>
+    <source src="https://ik.imagekit.io/Eduventure/pics/my%20listenings/lofi.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <h1>READING PASSAGE 1</h1>
+
+  <p><strong>You should spend about 20 minutes on Questions 1–13, which are based on Reading Passage 1.</strong></p>
+
+  <div class="container">
+
+    <div class="passage-box" id="readingText">
+      <h2 style="text-align: center;">Starting school later has positive effects on teens</h2>
+      <p style="font-style: italic;">A growing body of evidence demonstrates that adolescents benefit from more sleep.</p>
+
+      <p>With classes that start as early as 7 a.m. and buses that arrive long before sunrise, around 80% of U.S. children in grades 6–12 are not getting the recommended amount of sleep, according to research by the National Sleep Foundation. These early start times contribute to irritability, depression, poor grades, weight gain, and increased caffeine consumption.</p>
+
+      <p>Fueled by accumulating research showing that teens are biologically designed to sleep late, many U.S. schools are beginning the day later. Others resist, worried about bus schedules, after-school programs, or that children may just stay up later.</p>
+
+      <p>According to Kyla Wahlstrom, director of the Center for Applied Research and Educational Improvement at the University of Minnesota, despite differences in race and socioeconomic factors between two school districts, positive changes appeared immediately after adjusting start times.</p>
+
+      <p>Students were more alert, cafeterias were calmer, and there were fewer fights. With nearly an hour more sleep each night, students reported feeling less depressed. Parents also said their children were easier to live with.</p>
+
+      <h4>The melatonin shift</h4>
+
+      <p>As children approach puberty, their bodies begin releasing melatonin—the hormone responsible for sleepiness—about two hours later than before.</p>
+
+      <p>Teens cannot fall asleep before around 11 p.m., yet still need 9.25 hours of sleep. A major period of sleepiness occurs between 5–7 a.m. for teens and 3–5 a.m. for adults, meaning teens are biologically programmed to sleep when school asks them to wake.</p>
+
+      <p>Chronic sleep deprivation harms immunity and increases hunger hormones, possibly contributing to obesity.</p>
+
+      <p>Many teens turn to caffeinated drinks. In a Massachusetts high school, 95% consumed caffeine in the previous two weeks—mostly sodas, often in afternoons or evenings. Caffeine remains in the body up to five hours, reduces sleep quality, and may affect developing brains, though research is incomplete.</p>
+
+      <h4>Schools respond</h4>
+
+      <p>As research grows, more schools are shifting to later starts. Though not officially tracked, inquiries from districts continue to increase. One conclusion is clear: teens need adequate sleep, and changing school start times helps.</p>
+    </div>
+
+    <div class="controls">
+      <h1>Questions 1–13</h1>
+      <br>
+      <p><strong>Questions 1–5</strong></p>
+      <p>Do the following statements agree with the information in Reading Passage 1?</p>
+      <p>In boxes 1–5 on your answer sheet, write</p>
+
+      <div style="border: 1px solid black; padding: 10px; background: white; border-radius: 10px; margin: 30px 0px;">
+        <p><strong>TRUE</strong> if the statement agrees with the information</p>
+        <p><strong>FALSE</strong> if the statement contradicts the information</p>
+        <p><strong>NOT GIVEN</strong> if there is no information</p>
+      </div>
+
+      <p><strong>1.</strong> Sleep deprivation among U.S. children is a result of current school starting times.</p>
+      <select id="1">
+        <option value="">-- Choose --</option>
+        <option value="TRUE">TRUE</option>
+        <option value="FALSE">FALSE</option>
+        <option value="NOT GIVEN">NOT GIVEN</option>
+      </select>
+
+      <p><strong>2.</strong> Research indicates that most overweight children need more sleep.</p>
+      <select id="2">
+        <option value="">-- Choose --</option>
+        <option value="TRUE">TRUE</option>
+        <option value="FALSE">FALSE</option>
+        <option value="NOT GIVEN">NOT GIVEN</option>
+      </select>
+
+      <p><strong>3.</strong> Concerns about re-arranging bus timetables make some people oppose later school start times.</p>
+      <select id="3">
+        <option value="">-- Choose --</option>
+        <option value="TRUE">TRUE</option>
+        <option value="FALSE">FALSE</option>
+        <option value="NOT GIVEN">NOT GIVEN</option>
+      </select>
+
+      <p><strong>4.</strong> The two school districts in the Minnesota experiment had similar student groups.</p>
+      <select id="4">
+        <option value="">-- Choose --</option>
+        <option value="TRUE">TRUE</option>
+        <option value="FALSE">FALSE</option>
+        <option value="NOT GIVEN">NOT GIVEN</option>
+      </select>
+
+      <p><strong>5.</strong> Parents and children in the Minnesota districts got along better after the change.</p>
+      <select id="5">
+        <option value="">-- Choose --</option>
+        <option value="TRUE">TRUE</option>
+        <option value="FALSE">FALSE</option>
+        <option value="NOT GIVEN">NOT GIVEN</option>
+      </select>
+
+      <br><br>
+      <h1>Questions 6–13</h1>
+      <p>Complete the notes below.</p>
+      <p>Choose <strong>NO MORE THAN THREE WORDS AND/OR A NUMBER</strong> from the passage for each answer.</p>
+
+      <h2 style="text-align: center;">The melatonin shift</h2>
+      <ul>
+        <li><strong>Biological changes</strong>
+          <ul>
+            <li>Melatonin is released two hours later when teens reach <strong>6. </strong> <input type="text" id="6" style="width: 150px; display: inline;" placeholder="Answer"></li>
+            <li>Melatonin causes <strong>7. </strong> <input type="text" id="7" style="width: 150px; display: inline;" placeholder="Answer"></li>
+          </ul>
+        </li>
+        <br>
+        <li><strong>Sleep and awake times</strong>
+          <ul>
+            <li>Big drop in <strong>8. </strong> <input type="text" id="8" style="width: 150px; display: inline;" placeholder="Answer"> occurs later in the night.</li>
+            <li>5 a.m.–7 a.m. for teens; 3 a.m.–5 a.m. for adults.</li>
+          </ul>
+        </li>
+        <br>
+        <li><strong>Sleep loss</strong>
+          <ul>
+            <li>Leads to a weakened immune system.</li>
+            <li>Hormones released increase <strong>9. </strong> <input type="text" id="9" style="width: 150px; display: inline;" placeholder="Answer"> causing risk of obesity.</li>
+          </ul>
+        </li>
+        <br>
+        <li><strong>Caffeine</strong>
+          <ul>
+            <li>Teens in the Massachusetts study get caffeine mainly from <strong>10. </strong> <input type="text" id="10" style="width: 150px; display: inline;" placeholder="Answer"></li>
+            <li>Effects can last up to <strong>11. </strong> <input type="text" id="11" style="width: 150px; display: inline;" placeholder="Answer"></li>
+            <li>It makes sleep <strong>12. </strong> <input type="text" id="12" style="width: 150px; display: inline;" placeholder="Answer"> worse.</li>
+            <li>No info on impact on how young people's <strong>13. </strong> <input type="text" id="13" style="width: 150px; display: inline;" placeholder="Answer"> mature.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="button-group" style="margin-top:12px;">
+        <button id="submitBtn" onclick="checkAnswers()">Submit Answers</button>
+        <button id="downloadPdfBtn" onclick="downloadPDF()">📄 Download PDF</button>
+        <button id="resetStatsBtn" onclick="resetStats()">♻️ Reset Progress</button>
+      </div>
+      <div id="resultBox"></div>
+    </div>
+  </div>
+
+  <script type="module" src="/elements/firebase.js"></script>
+  <script src="/elements/lofi.js"></script>
+  <script type="module" src="/elements/reading.js"></script>
+<script src="/elements/UI.js"></script>
+<script src="/sw.js"></script>
+</body>
+</html>
