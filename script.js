@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(() => {
       // ✅ Also make redirect safe for subfolder deployments
-      window.location.href = new URL("./pages/auth/reg.html", window.location.href).pathname;
+      window.location.href = new URL("./pages/home/home%20page.html", window.location.href).pathname;
     }, 600);
   }, Duration_time);
 });
