@@ -945,6 +945,12 @@ footer {
     font-size: 14px;
     transition: color 0.3s;
 }
+.footer-el a:visited {
+    color: #56e0f8;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
 
 .footer-el a:hover {
     color: white;
