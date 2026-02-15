@@ -1,3 +1,4 @@
+/* Reset and Base Styles */
 html {
     overflow-x: hidden;
 }
@@ -25,6 +26,7 @@ img {
     max-width: 50px;
 }
 
+/* Header */
 header {
     position: sticky;
     top: 0px;
@@ -34,6 +36,7 @@ header {
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
+/* Top Bar */
 .top-bar {
     background-color: #111827;
     color: #f3f4f6;
@@ -101,6 +104,7 @@ header {
     display: flex;
 }
 
+/* Navigation Main */
 .nav-main {
     display: flex;
     justify-content: space-between;
@@ -137,6 +141,7 @@ header {
     margin-top: 2px;
 }
 
+/* Search Container */
 .search-container {
     display: flex;
     position: relative;
@@ -174,6 +179,7 @@ header {
     background: #6b7280;
 }
 
+/* User Actions */
 .user-actions {
     display: flex;
     justify-content: flex-end;
@@ -200,6 +206,7 @@ header {
     padding: 0;
 }
 
+/* Navigation Bottom */
 .nav-bottom {
     display: flex;
     justify-content: center;
@@ -242,6 +249,7 @@ header {
     gap: 8px;
 }
 
+/* Dropdown Navigation */
 .nav-dropdown-wrapper {
     position: relative;
     display: flex;
@@ -336,6 +344,7 @@ header {
     transform: scale(1.05);
 }
 
+/* Sidebar */
 .sidebar {
     position: fixed;
     top: 0;
@@ -384,6 +393,7 @@ header {
     margin-bottom: 20px;
 }
 
+/* Overlay */
 .overlay {
     position: fixed;
     top: 0;
@@ -399,6 +409,7 @@ header {
     display: block;
 }
 
+/* Hero Section - Matching Original Design */
 .hero {
     display: grid;
     background-color: #0f172a;
@@ -455,6 +466,7 @@ header {
     gap: 10px;
 }
 
+/* Perks Section */
 .perks {
     padding: 40px 5%;
     background-color: #f9fafb;
@@ -487,6 +499,7 @@ header {
     transform: translateY(-5px);
 }
 
+/* Feature Section */
 .feature-section {
     padding: 40px 5%;
     background: white;
@@ -581,6 +594,7 @@ header {
     margin-top: 12px;
 }
 
+/* Promo Banner */
 .promo-banner {
     background: #1f2937;
     padding: 60px 5%;
@@ -632,6 +646,7 @@ header {
     letter-spacing: 1px;
 }
 
+/* Testimonials */
 .testimonials {
     padding: 60px 5%;
     background: #f9fafb;
@@ -669,6 +684,7 @@ header {
     font-size: 14px;
 }
 
+/* Locations Market */
 .locations-market {
     padding: 60px 5%;
     background: white;
@@ -736,6 +752,7 @@ header {
     background: #111827;
 }
 
+/* FAQ Section */
 .faq-section {
     padding: 60px 5%;
     background: #f9fafb;
@@ -774,6 +791,7 @@ header {
     line-height: 1.6;
 }
 
+/* Footer */
 footer {
     background-color: #111827;
     color: #9ca3af;
@@ -927,9 +945,11 @@ footer {
     font-size: 14px;
     transition: color 0.3s;
 }
-
 .footer-el a:visited {
-    color: #9ca3af;
+    color: #56e0f8;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
 }
 
 .footer-el a:hover {
@@ -984,6 +1004,7 @@ footer {
 }
 
 
+/* Responsive Design - Matching Original */
 @media (max-width: 920px) {
     .icon-box {
         margin: -10px;
@@ -1131,6 +1152,7 @@ footer {
 
 }
 
+/* Quotes Section */
 .quotes {
     background: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #1e293b 100%);
     padding: 80px 5%;
@@ -1142,6 +1164,7 @@ footer {
     overflow: hidden;
 }
 
+/* Optimized starry background with subtle movement */
 .quotes::before {
     content: '';
     position: absolute;
@@ -1164,16 +1187,19 @@ footer {
     will-change: opacity, transform;
 }
 
+/* Twinkling stars */
 @keyframes twinkle {
     0%, 100% { opacity: 0.4; }
     50% { opacity: 0.7; }
 }
 
+/* Gentle drift movement - optimized */
 @keyframes gentleDrift {
     0% { transform: translate(0, 0); }
     100% { transform: translate(-25%, -25%); }
 }
 
+/* Ensure content appears above stars */
 .quotes > * {
     position: relative;
     z-index: 1;
@@ -1259,6 +1285,7 @@ footer {
     z-index: 1;
 }
 
+/* Quotes Responsive */
 @media (max-width: 920px) {
     .quotes {
         flex-direction: column;
@@ -1280,6 +1307,10 @@ footer {
     }
 }
 
+/* ============================================
+   Floating Back button (global)
+   Usage: <a class="back-fab" ...><i data-lucide="arrow-left"></i><span>Back</span></a>
+============================================ */
 :root{ --headerH: 0px; }
 
 .back-fab{
@@ -1299,7 +1330,7 @@ footer {
   font-size: 13px;
   line-height: 1;
   box-shadow: 0 10px 22px rgba(0,0,0,.12);
-  z-index: 1100;
+  z-index: 1100; /* above header (1000), below sidebar/overlay (1999+) */
   backdrop-filter: blur(10px);
 }
 .back-fab svg{ width: 18px; height: 18px; }
