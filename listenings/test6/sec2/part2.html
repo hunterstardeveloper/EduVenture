@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Listening Practice – Section 2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="/elements/listening.css">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+  <header>
+    <div class="top-bar">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <i data-lucide="headphones" size="16"></i> LISTENING PRACTICE PLATFORM
+      </div>
+      <div>PART 2: SECTION 2</div>
+    </div>
+    <div class="nav-main">
+      <div class="logo-text"><h1>EDU : LISTENING</h1></div>
+      <div>
+        <audio id="audio" src="https://ik.imagekit.io/Eduventure/pics/my%20listenings/test6/P2%20(2).mp3?updatedAt=1771161216664" preload="auto"></audio>
+        <button class="play-btn" id="masterPlayBtn" onclick="togglePlay()">
+          <i id="playIcon" data-lucide="play-circle"></i> 
+          <span id="btnText">Play Audio</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="section">
+    <div class="card">
+      <h2>Campus Map & Facilities</h2>
+      
+      <div style="max-width: 850px; margin: 0 auto;">
+        
+        <p style="margin-top: 0;">
+          <strong>Section 2. Questions 11 - 15</strong><br>
+          Listen to the directions and match the places (11-15) to the appropriate place among <strong>A-E</strong> on the map.
+        </p>
+
+        <div style="text-align: center; margin-bottom: 25px; background: #fff; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0;">
+            <img src="pic 1.png" alt="Campus Map" style="max-width: 100%; height: auto; border-radius: 4px;">
+        </div>
+
+        <ul style="list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; max-width: 400px;">
+            <span><strong>11.</strong> Student Centre</span>
+            <input type="text" id="q11" placeholder="A-E" style="width: 60px; text-align: center; text-transform: uppercase;">
+          </li>
+          <li style="margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; max-width: 400px;">
+            <span><strong>12.</strong> Health Centre</span>
+            <input type="text" id="q12" placeholder="A-E" style="width: 60px; text-align: center; text-transform: uppercase;">
+          </li>
+          <li style="margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; max-width: 400px;">
+            <span><strong>13.</strong> Internet Unit</span>
+            <input type="text" id="q13" placeholder="A-E" style="width: 60px; text-align: center; text-transform: uppercase;">
+          </li>
+          <li style="margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; max-width: 400px;">
+            <span><strong>14.</strong> Complaint Office</span>
+            <input type="text" id="q14" placeholder="A-E" style="width: 60px; text-align: center; text-transform: uppercase;">
+          </li>
+          <li style="margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; max-width: 400px;">
+            <span><strong>15.</strong> Café</span>
+            <input type="text" id="q15" placeholder="A-E" style="width: 60px; text-align: center; text-transform: uppercase;">
+          </li>
+        </ul>
+
+        <hr style="margin: 30px 0; border: 0; border-top: 1px solid #e2e8f0;">
+
+        <h4><i data-lucide="home" size="18"></i> Dormitory Rules</h4>
+        <p>
+            <strong>Questions 16 - 20</strong><br>
+            Complete the sentences below.<br>
+            Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer.
+        </p>
+
+        <ul style="list-style: none; padding-left: 0; line-height: 2.2;">
+            <li><strong>16.</strong> Students in a room don't need to share a <input type="text" id="q16" placeholder="Answer..." style="width: 150px;"> with ones in other rooms.</li>
+            <li><strong>17.</strong> Everyone has to write down his name on the <input type="text" id="q17" placeholder="Answer..." style="width: 150px;">.</li>
+            <li><strong>18.</strong> All the students use a <input type="text" id="q18" placeholder="Answer..." style="width: 150px;"> to enter the door.</li>
+            <li><strong>19.</strong> If you want to wash your clothes, go to the laundry room which is located in the <input type="text" id="q19" placeholder="Answer..." style="width: 150px;">.</li>
+            <li><strong>20.</strong> The dormitory closes at <input type="text" id="q20" placeholder="Answer..." style="width: 150px;"> every night.</li>
+        </ul>
+
+      </div>
+
+      <div id="resultBox"></div>
+
+      <div class="action-group">
+        <a href="/listenings/test6/sec1/part1.html" style="text-decoration: none;">
+             <button class="btn-main btn-outline">
+               <i data-lucide="arrow-left"></i> Previous
+             </button>
+        </a>
+        <button class="btn-main" onclick="checkAnswers()">
+          <i data-lucide="check-circle"></i> Submit Answers
+        </button>
+        <a href="/listenings/test6/sec3/part3.html" style="text-decoration: none;">
+          <button class="btn-main btn-outline">
+            Next Part <i data-lucide="arrow-right"></i>
+          </button>
+        </a>
+      </div>
+      
+      <div style="text-align: center;">
+        <button id="downloadPdfBtn" onclick="downloadPDF()">
+          <i data-lucide="file-text"></i> Download Result Certificate (PDF)
+        </button>
+      </div>
+      
+      <div id="resetStatsBtn">
+        <button class="btn-reset" onclick="resetStats()">
+          <i data-lucide="trash-2" size="16"></i> Clear All Data & Reset Stats
+        </button>
+      </div>
+    </div>
+  </div>
+  <script src="/elements/audio.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script type="module" src="/elements/listening.js"></script>
+<script src="/elements/UI.js"></script>
+<script src="/sw.js"></script>
+</body>
+</html>
