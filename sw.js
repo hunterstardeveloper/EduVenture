@@ -1,7 +1,7 @@
 ﻿
 "use strict";
 
-const CACHE_VERSION = "v3.3";
+const CACHE_VERSION = "v3.3.1";
 const CACHE_NAME = `eduventure-cache-${CACHE_VERSION}`;
 
 const SCOPE = self.registration ? self.registration.scope : self.location.origin + '/';
