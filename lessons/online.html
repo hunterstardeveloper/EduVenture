@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDUVENTURE | Lessons</title>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Site-wide layout/styles -->
+  <link rel="stylesheet" href="/pages/elements/style.css">
+
+  <!-- Page-specific styles -->
+  <link rel="stylesheet" href="/lessons/online.css">
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+</head>
+
+<body class="lessons-page" data-club="english" data-teacher="Abdurahim">
+
+  <!-- Mobile sidebar (matches other pages) -->
+  <div class="overlay" id="overlay"></div>
+  <div class="sidebar" id="sidebar">
+    <button class="sidebar-close" id="closeMenu" aria-label="Close menu">
+      <i data-lucide="x" size="32"></i>
+    </button>
+
+    <a href="/pages/home/home%20page.html"><i data-lucide="home"></i><span>Home</span></a>
+    <a href="/pages/study_materials/study_materials.html" id="nav-active-page"><i data-lucide="book-open"></i><span>Study Materials</span></a>
+    <a class="nav-a" href="/pages/chat/global.chat.html"><i data-lucide="messages-square"></i><span>Global Chat</span></a>
+    <a href="/pages/games/games.html"><i data-lucide="joystick"></i><span>Games</span></a>
+    <a href="/pages/challenges/weekly_challanges.html"><i data-lucide="star"></i><span>Weekly challanges</span></a>
+  </div>
+
+  <header>
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <div class="dot"></div>
+        <p>Free learning resources available | Student community support 24/7</p>
+      </div>
+    </div>
+
+    <nav class="nav-main">
+      <div class="logo-section" onclick="location.href='/pages/home/home%20page.html'">
+        <img style="cursor: pointer;" src="/assets/logo.png" alt="icon" class="icon-box">
+        <div style="cursor: pointer;" class="logo-text">
+          <h1><span style="color: #ffffff;">EDU</span><span style="color: #fbbf24;">VENTURE</span></h1>
+          <p>PREMIUM LEARNING</p>
+        </div>
+      </div>
+
+      <div class="user-actions">
+        <a href="/pages/mark/remark.html" class="action-item cart">
+          <i data-lucide="bookmark"></i>
+          Saved
+        </a>
+        <a href="/pages/account/account.html" class="action-item cart">
+          <i data-lucide="user"></i>
+          Profile
+        </a>
+
+        <button class="mobile-hamburger" id="openMenu" aria-label="Open menu">
+          <i data-lucide="menu" size="28"></i>
+        </button>
+      </div>
+    </nav>
+
+    <div class="nav-bottom" onclick="location.href='/pages/home/home%20page.html'">
+      <a class="nav-a" href="/pages/home/home%20page.html"><i data-lucide="home"></i><span>Home</span></a>
+      <a class="nav-a" id="nav-active-page" href="/pages/study_materials/study_materials.html"><i data-lucide="book-open"></i><span>Study Materials</span></a>
+      <a class="nav-a" href="/pages/chat/global.chat.html"><i data-lucide="messages-square"></i><span>Global Chat</span></a>
+      <a class="nav-a" href="/pages/games/games.html"><i data-lucide="joystick"></i><span>Games</span></a>
+      <a class="nav-a" href="/pages/challenges/weekly_challanges.html"><i data-lucide="star"></i><span>Weekly challanges</span></a>
+    </div>
+  </header>
+
+  <!-- Hero (blurred background slider) -->
+  <main class="hero lessons-hero">
+    <div class="hero-bg" aria-hidden="true">
+      <img id="heroBgImg" src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22800%22%20height%3D%22450%22%20viewBox%3D%220%200%20800%20450%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fbbf24%22%20stop-opacity%3D%220.35%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2360a5fa%22%20stop-opacity%3D%220.25%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22b%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%221%22%20y2%3D%220%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%230f172a%22%20stop-opacity%3D%220.96%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23111827%22%20stop-opacity%3D%220.96%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22800%22%20height%3D%22450%22%20rx%3D%2226%22%20fill%3D%22url%28%23b%29%22/%3E%0A%20%20%3Crect%20x%3D%2226%22%20y%3D%2226%22%20width%3D%22748%22%20height%3D%22398%22%20rx%3D%2222%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%3Crect%20x%3D%2256%22%20y%3D%2264%22%20width%3D%22688%22%20height%3D%2250%22%20rx%3D%2214%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.10%29%22/%3E%0A%20%20%3Crect%20x%3D%2256%22%20y%3D%22132%22%20width%3D%22520%22%20height%3D%2220%22%20rx%3D%2210%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%3Crect%20x%3D%2256%22%20y%3D%22164%22%20width%3D%22420%22%20height%3D%2220%22%20rx%3D%2210%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.14%29%22/%3E%0A%20%20%3Crect%20x%3D%2256%22%20y%3D%22236%22%20width%3D%22688%22%20height%3D%222%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.20%29%22/%3E%0A%20%20%3Ccircle%20cx%3D%22660%22%20cy%3D%22320%22%20r%3D%2254%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.10%29%22/%3E%0A%20%20%3Ccircle%20cx%3D%22660%22%20cy%3D%22320%22%20r%3D%2238%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.14%29%22/%3E%0A%20%20%3Ctext%20x%3D%2260%22%20y%3D%2298%22%20font-family%3D%22Inter%2CArial%22%20font-size%3D%2230%22%20font-weight%3D%22800%22%20fill%3D%22white%22%3ECERTIFICATE%3C/text%3E%0A%20%20%3Ctext%20x%3D%2260%22%20y%3D%22210%22%20font-family%3D%22Inter%2CArial%22%20font-size%3D%2222%22%20font-weight%3D%22700%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.92%29%22%3EYour%20Certificate%3C/text%3E%0A%20%20%3Ctext%20x%3D%2260%22%20y%3D%22362%22%20font-family%3D%22Inter%2CArial%22%20font-size%3D%2214%22%20font-weight%3D%22600%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.68%29%22%3EReplace%20this%20image%20with%20your%20ImageKit%20certificate%20URL%3C/text%3E%0A%3C/svg%3E" alt="">
+    </div>
+
+    <div class="lessons-hero-inner">
+      <div class="hero-topbar">
+        <div class="hero-copy">
+          <h2>Lessons</h2>
+          <p id="lessonsSubtitle">Watch, read, practice — everything for this club in one place.</p>
+        </div>
+
+        <a class="hero-back" href="/pages/study_materials/study_materials.html">
+          <i data-lucide="arrow-left"></i>
+          Back to Study Materials
+        </a>
+      </div>
+
+      <section class="cert-slider" aria-label="Certificates">
+        <button class="slider-arrow prev" id="certPrev" type="button" aria-label="Previous certificate">
+          <i data-lucide="chevron-left"></i>
+        </button>
+
+        <div class="slider-viewport" id="certViewport" tabindex="0" aria-label="Certificates slider">
+          <div class="slider-track" id="certTrack">
+            <article class="cert-slide" data-title="Certificate #1">
+              <img class="cert-img" src="https://ik.imagekit.io/Eduventure/pics/certificates/IMG_1382.MP4?updatedAt=1771188889352" alt="Certificate #1">
+              <div class="cert-caption">Certificate #1</div>
+            </article>
+            <article class="cert-slide" data-title="Certificate #2">
+              <img class="cert-img" src="https://ik.imagekit.io/Eduventure/pics/certificates/IMG_9926.MP4?updatedAt=1771188893595" alt="Certificate #2">
+              <div class="cert-caption">Certificate #2</div>
+            </article>
+            <article class="cert-slide" data-title="Certificate #3">
+              <img class="cert-img" src="https://ik.imagekit.io/Eduventure/pics/certificates/IMG_7107.MP4?updatedAt=1771188892584" alt="Certificate #3">
+              <div class="cert-caption">Certificate #3</div>
+            </article>
+            <article class="cert-slide" data-title="Certificate #4">
+              <img class="cert-img" src="https://ik.imagekit.io/Eduventure/pics/certificates/IMG_1820.MP4?updatedAt=1771191602228" alt="Certificate #4">
+              <div class="cert-caption">Certificate #4</div>
+            </article>
+            <article class="cert-slide" data-title="Certificate #5">
+              <img class="cert-img" src="https://ik.imagekit.io/Eduventure/pics/certificates/IMG_3417.MP4?updatedAt=1771188884432" alt="Certificate #5">
+              <div class="cert-caption">Certificate #5</div>
+            </article>
+            <article class="cert-slide" data-title="Certificate #6">
+              <img class="cert-img" src="https://ik.imagekit.io/Eduventure/pics/certificates/IMG_0455.MP4?updatedAt=1771191602370" alt="Certificate #6">
+              <div class="cert-caption">Certificate #6</div>
+            </article>
+          </div>
+        </div>
+
+        <button class="slider-arrow next" id="certNext" type="button" aria-label="Next certificate">
+          <i data-lucide="chevron-right"></i>
+        </button>
+      </section>
+
+      <div class="slider-meta">
+        <div class="slider-dots" id="certDots" aria-label="Certificate position"></div>
+        <button class="slider-toggle" id="certToggle" type="button">Pause</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Content -->
+  <section class="lessons-wrap">
+
+    <div class="mentor-card">
+      <img src="https://ik.imagekit.io/Eduventure/pics/photo_2023-08-26_09-44-16.jpg" onerror="this.onerror=null;this.src='/assets/logo.png';" alt="Mentor" class="mentor-photo">
+      <div class="mentor-meta">
+        <h3 class="mentor-name">Abdurahim Abduvasitov</h3>
+        <p class="mentor-sub">English Club Mentor</p>
+        <p class="mentor-hint">Join the <a href="https://t.me/abdurahim_student_results">Mr Abdurahim English channel </a> .</p>
+      </div>
+    </div>
+
+    <div class="lessons-grid">
+      <div class="left-panel">
+        <div class="panel-head">
+          <h3 class="panel-title">All lessons</h3>
+          <p class="panel-desc">New lessons appear here automatically.</p>
+        </div>
+
+        <div id="courses" class="courses" aria-label="Lessons list"></div>
+      </div>
+
+      <div class="right-panel">
+        <div class="panel-head">
+          <h3 class="panel-title">Lesson details</h3>
+          <p class="panel-desc">Video, tasks, documents, downloads, and comments.</p>
+        </div>
+
+        <!-- Admin: Add lesson modal -->
+        <div id="addModal" class="modal-overlay" aria-hidden="true">
+          <div class="modal" role="dialog" aria-modal="true" aria-labelledby="addModalTitle">
+            <div class="left">
+              <div class="modal-header">
+                <h3 id="addModalTitle" style="margin:0;">Add resources</h3>
+                <button id="addModalClose" class="icon-btn" type="button" aria-label="Close">✕</button>
+              </div>
+
+              <label class="label">Title</label>
+              <input id="addTitle" type="text" class="input-field" placeholder="Example: 3. Present Simple">
+
+              <label class="label">Description / Note</label>
+              <textarea id="addDesc" class="input-field" placeholder="Short note..." style="height: 90px;"></textarea>
+
+              <label class="label">Links (one per line)</label>
+              <textarea id="addLinks" class="input-field" placeholder="https://youtu.be/...\nhttps://ik.imagekit.io/.../file.pdf" style="height: 120px;"></textarea>
+
+              <label class="label">Tasks (optional, one per line)</label>
+              <textarea id="addTasks" class="input-field" placeholder="1) ...\n2) ..." style="height: 90px;"></textarea>
+
+              <div class="modal-actions">
+                <button id="addCommit" class="start-btn" type="button">Commit</button>
+                <button id="addClear" class="start-btn report-btn" type="button">Clear</button>
+              </div>
+
+              <p id="addStatus" class="modal-status" style="display:none;"></p>
+
+              <div class="modal-tip">
+                <strong>Files:</strong> Upload to ImageKit and paste the direct file URLs into the “Links” box (one per line).
+                <a href="https://imagekit.io/dashboard/media-library/L2ZpbGVz" target="_blank" rel="noopener">Open ImageKit</a>
+              </div>
+            </div>
+
+            <div class="right">
+              <h4 style="margin: 0 0 10px 0;">Preview</h4>
+              <div id="addPreview" class="preview-area">
+                <p style="color: var(--muted); font-size: 13px;">Paste a link to see preview here.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section class="video-section" id="videoSection" aria-live="polite">
+          <div class="video-scrollable" id="videoScrollable">
+            <div class="video-container" id="videoPlayer" style="display:none;">
+              <iframe id="videoIframe" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+          </div>
+          <p id="noVideoMsg" style="display:none;" class="no-video-msg">📹 No video for this lesson.</p>
+
+          <div class="tabs" role="tablist">
+            <div class="tab active" role="tab" aria-selected="true" tabindex="0" data-tab="tab1">Topic</div>
+            <div class="tab" role="tab" aria-selected="false" tabindex="0" data-tab="tab2">Tasks</div>
+            <div class="tab" role="tab" aria-selected="false" tabindex="0" data-tab="tab3">Docs</div>
+            <div class="tab" role="tab" aria-selected="false" tabindex="0" data-tab="tab4">Downloads</div>
+            <div class="tab" role="tab" aria-selected="false" tabindex="0" data-tab="tab5">Comments</div>
+          </div>
+
+          <div id="tab1" class="content active" role="tabpanel">
+            <div id="qa-container"></div>
+          </div>
+          <div id="tab2" class="content" role="tabpanel">
+            <div id="task-container"></div>
+          </div>
+          <div id="tab3" class="content" role="tabpanel">
+            <div id="doc-container"></div>
+          </div>
+          <div id="tab4" class="content" role="tabpanel">
+            <div id="download-container"></div>
+          </div>
+
+          <div id="tab5" class="content" role="tabpanel">
+            <div class="content-card">
+              <h4>Leave a comment</h4>
+              <div id="commentAuthState" class="muted" style="margin-bottom: 10px;"></div>
+
+              <textarea id="commentText" placeholder="Your message" class="input-field" style="height: 90px;"></textarea>
+
+              <div class="buttonholder">
+                <button id="commentSendBtn" class="start-btn" type="button">Send</button>
+                <a href="https://t.me/Hunters1ar" target="_blank" class="start-btn report-btn">Report</a>
+              </div>
+
+              <hr class="soft-hr">
+
+              <div class="feedback-scroll-container">
+                <div id="feedback-list"></div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-el">
+        <div class="footer-logo">
+          <img src="/assets/logo.png" alt="icon" class="icon-box" style="width: 40px; height: 40px;">
+          <h2><span style="color: #ffffff;">EDU</span><span style="color: #fbbf24;">VENTURE</span></h2>
+        </div>
+        <p>Empowering students globally with premium resources, expert-led courses, and a supportive learning community since 2026.</p>
+      </div>
+
+      <div class="footer-holder">
+        <div class="footer-el">
+          <h3>Explore</h3>
+          <ul>
+            <li><a href="/pages/study_materials/study_materials.html">Study Materials</a></li>
+            <li><a href="/pages/challenges/weekly_challanges.html">Weekly Challenges</a></li>
+            <li><a href="/pages/games/games.html">Games</a></li>
+            <li><a href="/pages/chat/global.chat.html">Community Forum</a></li>
+          </ul>
+        </div>
+        <div class="footer-el">
+          <h3>Contact Us</h3>
+          <div class="holder-footer-el">
+            <div class="contact-item">
+              <i data-lucide="phone" size="18"></i>
+              <div>
+                <strong>Student Support</strong>
+                <p>+998 90 855 75 85</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i data-lucide="mail" size="18"></i>
+              <div>
+                <strong>Email</strong>
+                <p><a target="_blank" href="mailto:kyuter789@gmail.com" class="email-link">kyuter789@gmail.com</a></p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i data-lucide="send" size="18"></i>
+              <div>
+                <strong>telegram</strong>
+                <p><a target="_blank" href="https://t.me/Hunters1ar" class="telegram">@Hunters1ar</a></p>
+                <p><a target="_blank" href="https://t.me/EduVentureuz" class="telegram">EduVenture channel</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p style="text-align: center; font-size: small;">© 2026 Eduventure Learning. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Shared scripts used across the site -->
+  <script src="/elements/UI.js"></script>
+  <script src="/sw.js"></script>
+  <script src="/pages/elements/script.js"></script>
+
+  <!-- Page logic -->
+  <script type="module" src="/lessons/online.js"></script>
+</body>
+</html>
