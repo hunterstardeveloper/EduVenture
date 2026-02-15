@@ -1,0 +1,1075 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduHub - Premium Learning Platform</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/pages/elements/style.css">
+<style>
+.listening-section {
+    padding: 80px 5%;
+    background-color: #f8fafc;
+    background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+    background-size: 30px 30px; 
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.glass-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.category-tag {
+    font-size: 12px;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.glass-header h2 {
+    font-size: 32px;
+    letter-spacing: 2px;
+    color: #1e293b;
+    font-weight: 800;
+}
+
+.accent-line {
+    width: 60px;
+    height: 4px;
+    background: #1e293b; /* Dark like your Logo */
+    margin: 15px auto;
+    border-radius: 2px;
+}
+
+.links-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1100px;
+}
+
+.cont-ani{
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;      /* vertical center */
+  justify-content: center;  /* horizontal center */
+  z-index: 9999;
+}
+
+/* Centered card/box */
+.ani-box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+}
+
+/* Nice sizing */
+.gif-video{
+  width: 200px;   /* change size if you want */
+  height: auto;
+  display: block;
+}
+
+
+.links-wrapper button {
+    aspect-ratio: 2 / 1;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px; /* Rounded corners but not a circle */
+    color: #1e293b;
+    font-size: 28px;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+/* Hover Effect: The button "lifts" and the border highlights */
+.links-wrapper button:hover {
+    transform: translateY(-8px);
+    background: #ffffff;
+    border-color: #1e293b;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    color: gray; /* Changes to your brand green on hover */
+}
+
+/* Small label for the buttons so they don't look like just floating numbers */
+.links-wrapper button::before {
+    content: 'MODULE';
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .links-wrapper { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+    .links-wrapper { grid-template-columns: repeat(1, 1fr); }
+}
+
+/* Completion colors (localStorage-based) */
+.links-wrapper button.todo{
+  border: 2px solid rgba(220,38,38,.55) !important;
+  box-shadow: 0 0 0 4px rgba(220,38,38,.10);
+}
+.links-wrapper button.done{
+  border: 2px solid rgba(22,163,74,.55) !important;
+  box-shadow: 0 0 0 4px rgba(22,163,74,.10);
+}
+
+
+.links-wrapper button.progress{
+  border: 2px solid rgba(234,179,8,.60) !important;
+  box-shadow: 0 0 0 4px rgba(234,179,8,.12);
+}
+
+/* ------------------------------
+   Admin panel (hidden hotkey)
+-------------------------------- */
+.admin-overlay{
+  position: fixed;
+  inset: 0;
+  display: none; /* shown via JS */
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background:
+    radial-gradient(1200px 600px at 20% 10%, rgba(56,189,248,.22), transparent 55%),
+    radial-gradient(900px 500px at 90% 80%, rgba(251,191,36,.18), transparent 55%),
+    rgba(15,23,42,.62);
+  backdrop-filter: blur(14px) saturate(170%);
+  -webkit-backdrop-filter: blur(14px) saturate(170%);
+  z-index: 99999;
+}
+
+.admin-card{
+  width: 100%;
+  max-width: 560px;
+  border-radius: 22px;
+  overflow: hidden;
+  position: relative;
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  box-shadow: 0 28px 70px rgba(0,0,0,.35);
+  transform: translateY(8px);
+  opacity: 0;
+  animation: adminPop .22s ease forwards;
+}
+@keyframes adminPop{
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* glow border */
+.admin-card::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius: 24px;
+  background: linear-gradient(120deg,
+    rgba(56,189,248,.55),
+    rgba(251,191,36,.45),
+    rgba(15,23,42,.25),
+    rgba(56,189,248,.55)
+  );
+  filter: blur(10px);
+  opacity: .55;
+  z-index: -2;
+}
+.admin-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius: 22px;
+  background: rgba(255,255,255,.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: -1;
+  border: 1px solid rgba(226,232,240,.9);
+}
+
+/* header */
+.admin-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 16px 16px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.95), rgba(248,250,252,.92));
+  border-bottom: 1px solid rgba(226,232,240,.9);
+}
+
+.admin-title{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  font-weight: 900;
+  letter-spacing: .4px;
+  color: #0f172a;
+  font-size: 18px;
+}
+.admin-title-left{
+  display:inline-flex;
+  align-items:center;
+  gap: 10px;
+}
+.admin-badge{
+  display:inline-flex;
+  align-items:center;
+  gap: 6px;
+  margin-left: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .4px;
+  color: #0f172a;
+  background: rgba(56,189,248,.12);
+  border: 1px solid rgba(56,189,248,.22);
+}
+
+.admin-close{
+  border: 0;
+  background: transparent;
+  padding: 10px;
+  border-radius: 14px;
+  cursor: pointer;
+  color: #0f172a;
+  transition: transform .12s ease, background .12s ease;
+}
+.admin-close:hover{ background: rgba(15,23,42,.06); transform: rotate(3deg); }
+.admin-close:active{ transform: scale(.98); }
+
+/* body / form */
+.admin-body{
+  padding: 16px;
+  display:flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-field{
+  display:flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-label{
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #475569;
+}
+
+.admin-input{
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(226,232,240,.95);
+  background: rgba(255,255,255,.92);
+  padding: 12px 14px;
+  outline: none;
+  font-weight: 650;
+  color: #0f172a;
+  transition: box-shadow .16s ease, border-color .16s ease, transform .16s ease;
+}
+
+.admin-input:focus{
+  border-color: rgba(56,189,248,.55);
+  box-shadow: 0 0 0 4px rgba(56,189,248,.16);
+  transform: translateY(-1px);
+}
+
+.admin-row{
+  display:flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.admin-toggle{
+  flex: 0 0 auto;
+  border-radius: 16px;
+  border: 1px solid rgba(226,232,240,.95);
+  background: rgba(255,255,255,.92);
+  padding: 12px 12px;
+  cursor: pointer;
+  color: #0f172a;
+  transition: transform .14s ease, box-shadow .14s ease;
+}
+.admin-toggle:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(15,23,42,.10);
+}
+.admin-toggle:active{ transform: translateY(0); }
+
+.admin-hint{
+  margin: 0;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.admin-status{
+  display: none; /* shown when message exists */
+  align-items: center;
+  gap: 10px;
+  border-radius: 16px;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 650;
+  border: 1px solid rgba(226,232,240,.9);
+}
+.admin-status.success{
+  background: rgba(34,197,94,.10);
+  border-color: rgba(34,197,94,.25);
+  color: #14532d;
+}
+.admin-status.error{
+  background: rgba(239,68,68,.10);
+  border-color: rgba(239,68,68,.25);
+  color: #7f1d1d;
+}
+.admin-status.info{
+  background: rgba(56,189,248,.10);
+  border-color: rgba(56,189,248,.25);
+  color: #0f172a;
+}
+
+.admin-apply{
+  margin-top: 2px;
+  width: 100%;
+  border: 0;
+  border-radius: 16px;
+  padding: 12px 14px;
+  font-weight: 900;
+  letter-spacing: .4px;
+  cursor: pointer;
+  color: #0b1220;
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(56,189,248,.95), rgba(251,191,36,.95));
+  box-shadow: 0 16px 34px rgba(15,23,42,.18);
+  transition: transform .18s ease, filter .18s ease, box-shadow .18s ease;
+}
+.admin-apply:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+  box-shadow: 0 20px 46px rgba(15,23,42,.22);
+}
+.admin-apply:active{ transform: translateY(0); }
+.admin-apply:disabled{
+  cursor: not-allowed;
+  filter: grayscale(.15) brightness(.95);
+  opacity: .75;
+}
+
+.admin-footnote{
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: #94a3b8;
+  text-align: center;
+}
+
+
+</style>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <a class="back-fab" id="backFab" href="/pages/study_materials/study_materials.html" aria-label="Go back"><i data-lucide="arrow-left"></i><span>Back</span></a>
+    <div class="overlay" id="overlay"></div>
+    <div class="sidebar" id="sidebar">
+        <button class="sidebar-close" id="closeMenu">
+            <i data-lucide="x" size="32"></i>
+        </button>
+        <a href="/pages/home/home page.html" ><i data-lucide="home"></i><span>Home</span></a>
+        <a href="/pages/study_materials/study_materials.html"><i data-lucide="book-open"></i><span>Study Materials</span></a>
+        <a class="nav-a" href="/pages/chat/global.chat.html"><i data-lucide="messages-square"></i><span>Global Chat</span></a>
+        <a href="/pages/games/games.html"><i data-lucide="joystick"></i><span>Games</span></a>
+        <a href="/pages/challenges/weekly_challanges.html"><i data-lucide="star"></i><span>Weekly challanges</span></a>
+    </div>
+    <header>
+        <div class="top-bar">
+            <div class="top-bar-left">
+                <div class="dot"></div>
+                <p>
+                    Free learning resources available | Student community support 24/7
+                </p>
+            </div>
+        </div>
+
+        <nav class="nav-main">
+            <div class="logo-section" onclick="location.href='/pages/home/home page.html'">
+                <img style="cursor: pointer;" src="/assets/logo.png" alt="icon" class="icon-box">
+                <div style="cursor: pointer;" class="logo-text">
+                    <h1><span style="color: #ffffff;">EDU</span><span style="color: #fbbf24;">VENTURE</span></h1>
+                    <p>PREMIUM LEARNING</p>
+                </div>
+            </div>
+
+            <div class="user-actions">
+                <a href="/pages/mark/remark.html" class="action-item cart">
+                    <i data-lucide="bookmark"></i>
+                    Saved
+                </a>
+                <a href="/pages/account/account.html" class="action-item cart">
+                    <i data-lucide="user"></i>
+                    Profile
+                </a>
+
+                <button class="mobile-hamburger" id="openMenu">
+                    <i data-lucide="menu" size="28"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div class="nav-bottom">
+            <a class="nav-a"  href="/pages/home/home page.html"><i data-lucide="home"></i><span>Home</span></a>            
+            <a class="nav-a" href="/pages/study_materials/study_materials.html"><i data-lucide="book-open"></i><span>Study Materials</span></a>
+            <a class="nav-a" href="/pages/chat/global.chat.html"><i data-lucide="messages-square"></i><span>Global Chat</span></a>
+            <a href="/pages/games/games.html"><i data-lucide="joystick"></i><span>Games</span></a>
+            <a class="nav-a" href="/pages/challenges/weekly_challanges.html"><i data-lucide="star"></i><span>Weekly challanges</span></a>
+        </div>
+    </header>
+    <div class="listening-section">
+        <div class="glass-header">
+            <h2></h2>
+            <div class="accent-line"></div>
+        </div>
+        <div class="links-wrapper">
+            <div class="cont-ani">
+                <div class="ani-box">
+                    <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWt5YTFwYTh5bnIxcTB0aWZhOHBzeGU3dGlqanI4a3c3YXQ2ODJ0NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/shy4aW0HlGtKLhvAXt/giphy.gif" alt="wait" class="gif-video"/>
+                    <p class="yozuv">Loading...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel (Ctrl+Shift+Alt then type ADMIN) -->
+    <div class="admin-overlay" id="adminOverlay" aria-hidden="true">
+        <div class="admin-card" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+            <div class="admin-top">
+                <div class="admin-title" id="adminTitle">
+                    <span class="admin-title-left">
+                        <i data-lucide="shield" size="20"></i>
+                        <span>Admin Panel</span>
+                    </span>
+                    <span class="admin-badge">
+                        <i data-lucide="lock" size="16"></i>
+                        <span>SECURE</span>
+                    </span>
+                </div>
+                <button class="admin-close" id="adminCloseBtn" type="button" aria-label="Close">
+                    <i data-lucide="x" size="22"></i>
+                </button>
+            </div>
+
+            <form class="admin-body" id="adminForm" autocomplete="off" novalidate>
+                <div class="admin-field">
+                    <label class="admin-label" for="adminListeningSelect">Listening</label>
+                    <select class="admin-input" id="adminListeningSelect"></select>
+                </div>
+
+                <div class="admin-field">
+                    <label class="admin-label" for="adminPasswordInput">Password</label>
+                    <div class="admin-row">
+                        <input type="text" name="username" autocomplete="username" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;"/>
+                        <input class="admin-input" id="adminPasswordInput" type="password" placeholder="Set / change password" autocomplete="new-password" />
+                        <button class="admin-toggle" id="adminPwToggle" type="button" aria-label="Show password">
+                            <i data-lucide="eye" size="18"></i>
+                        </button>
+                    </div>
+                    <p class="admin-hint">Leave it empty + press Apply to remove a password.</p>
+                </div>
+
+                <div class="admin-status info" id="adminStatus" role="status" aria-live="polite"></div>
+
+                <button class="admin-apply" id="adminApplyBtn" type="submit">
+                    <i data-lucide="sparkles" size="20"></i>
+                    <span>Apply</span>
+                </button>
+
+                <p class="admin-footnote">Shortcut: Ctrl + Shift + Alt then type <b>ADMIN</b></p>
+            </form>
+        </div>
+    </div>
+
+
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-el">
+                <div class="footer-logo">
+                    <img src="/assets/logo.png" alt="icon" class="icon-box" style="width: 40px; height: 40px;">
+                    <h2><span style="color: #ffffff;">EDU</span><span style="color: #fbbf24;">VENTURE</span></h2>
+                </div>
+                <p>Empowering students globally with premium resources, expert-led courses, and a supportive learning community since 2024.</p>
+            </div>
+            
+            <div class="footer-holder">
+                <div class="footer-el">
+                    <h3>Explore</h3>
+                    <ul>
+                        <li><a href="/pages/study_materials/study_materials.html">Study Materials</a></li>
+                        <li><a href="/pages/challenges/weekly_challanges.html">Weekly Challenges</a></li>
+                        <li><a href="/pages/games/games.html">Games</a></li>
+                        <li><a href="/pages/chat/global.chat.html">Community Forum</a></li>
+                    </ul>
+                </div>
+                <div class="footer-el">
+                    <h3>Contact Us</h3>
+                    <div class="holder-footer-el">
+                        <div class="contact-item">
+                            <i data-lucide="phone" size="18"></i>
+                            <div>
+                                <strong>Student Support</strong>
+                                <p>+998 90 855 75 85</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i data-lucide="mail" size="18"></i>
+                            <div>
+                                <strong>Email</strong>
+                                <p><a href="mailto:kyuter789@gmail.com" class="email-link">kyuter789@gmail.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i data-lucide="send" size="18"></i>
+                            <div>
+                                <strong>telegram</strong>
+                                <p><a href="https://t.me/Hunters1ar" class="telegram">@Hunters1ar</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p style="text-align: center; font-size: small;">Â© 2026 Eduventure Learning. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="/elements/UI.js"></script>
+    <script src="/pages/elements/script.js"></script>
+
+    <script type="module">
+      import { auth, db, ref, get } from "/elements/firebase.js";
+      import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+      import { set, update } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+
+      const PROVIDER_PATH = "/vocabularies/provider.html";
+
+      const PASSWORDS_PATH = "vocabularies/listeningwords_passwords";
+
+      const STUDENT_ACCESS_PATH = (uid) => `students/${uid}/vocabularies/listeningwords`;
+
+      const header = document.querySelector(".glass-header h2");
+      const wrap = document.querySelector(".links-wrapper");
+
+      const safeKey = (s) => String(s || "").replace(/[^a-zA-Z0-9_-]/g, "_").slice(0, 120);
+      const pretty  = (s) => String(s || "").replace(/[-_]+/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
+
+      let _uid = null;
+      let _names = [];
+      let _pwMap = {}; 
+       let _access = {};
+
+
+      const toHex = (bytes) => [...bytes].map(b => b.toString(16).padStart(2, "0")).join("");
+
+      function hexToBytes(hex) {
+        const clean = String(hex || "").replace(/[^0-9a-f]/gi, "");
+        if (!clean) return new Uint8Array();
+        if (clean.length % 2 !== 0) throw new Error("Invalid hex length");
+        const out = new Uint8Array(clean.length / 2);
+        for (let i = 0; i < out.length; i++) out[i] = parseInt(clean.substr(i * 2, 2), 16);
+        return out;
+      }
+
+      async function sha256Hex(bytes) {
+        const digest = await crypto.subtle.digest("SHA-256", bytes);
+        return toHex(new Uint8Array(digest));
+      }
+
+      async function hashWithSaltHex(saltHex, password) {
+        const saltBytes = hexToBytes(saltHex);
+        const pwBytes = new TextEncoder().encode(String(password));
+        const combined = new Uint8Array(saltBytes.length + pwBytes.length);
+        combined.set(saltBytes, 0);
+        combined.set(pwBytes, saltBytes.length);
+        return sha256Hex(combined);
+      }
+
+      async function makeSaltedHash(password) {
+        const salt = crypto.getRandomValues(new Uint8Array(16));
+        const hashHex = await hashWithSaltHex(toHex(salt), password);
+        return { saltHex: toHex(salt), hashHex };
+      }
+
+
+      function showMessage(msg) {
+        wrap.innerHTML = "";
+        const p = document.createElement("p");
+        p.className = "yozuv";
+        p.textContent = msg;
+        wrap.appendChild(p);
+      }
+
+      function goToProvider(type, name) {
+        const url = new URL(PROVIDER_PATH, location.origin);
+        url.searchParams.set("type", type);
+        url.searchParams.set("name", name);
+        location.href = url.toString();
+      }
+
+      async function loadPasswordMap() {
+        try {
+          const snap = await get(ref(db, PASSWORDS_PATH));
+          _pwMap = snap.exists() ? (snap.val() || {}) : {};
+        } catch (e) {
+          console.warn("Password map read failed:", e);
+          _pwMap = {};
+        }
+      }
+
+      function getPasswordNode(name) {
+        const k = safeKey(name);
+        return (_pwMap && (_pwMap[k] || _pwMap[name])) || null;
+      }
+
+      function hasPassword(name) {
+        const node = getPasswordNode(name);
+        return !!(node && node.saltHex && node.hashHex);
+      }
+
+      async function maybeAskPassword(name) {
+        const node = getPasswordNode(name);
+        if (!node || !node.saltHex || !node.hashHex) return true;
+
+        const pw = prompt(`Password required for "${pretty(name)}"`);
+        if (pw === null) return false;
+
+        try {
+          const computed = await hashWithSaltHex(node.saltHex, pw);
+          const ok = computed.toLowerCase() === String(node.hashHex).toLowerCase();
+          if (!ok) alert("âŒ Wrong password.");
+          return ok;
+        } catch (e) {
+          console.error(e);
+          alert("âŒ Password check failed (crypto error).");
+          return false;
+        }
+      }
+
+      async function openListening(name) {
+        if (hasPassword(name)) {
+          let unlocked = false;
+          const k = safeKey(name);
+
+          if (_uid) {
+            try {
+              const hs = await get(ref(db, `${STUDENT_ACCESS_PATH(_uid)}/${k}/hasaccess`));
+              unlocked = hs.exists() && hs.val() === true;
+              _access[k] = { ...(_access[k] || {}), name, hasaccess: unlocked };
+            } catch {
+              const aNode = (_access && (_access[k] || _access[name])) || null;
+              unlocked = !!aNode?.hasaccess;
+            }
+          }
+
+          if (!unlocked) {
+            const ok = await maybeAskPassword(name);
+            if (!ok) return;
+          }
+        }
+
+        if (_uid) {
+          const k = safeKey(name);
+          const nodeRef = ref(db, `${STUDENT_ACCESS_PATH(_uid)}/${k}`);
+          try {
+            const s = await get(nodeRef);
+            const existing = s.exists() ? (s.val() || {}) : null;
+
+            const now = Date.now();
+
+            const payload = {
+              name,
+              lastOpenedAtMs: now,
+            };
+
+            if (!existing || typeof existing.hasaccess !== "boolean") {
+              payload.hasaccess = false;
+              payload.firstOpenedAtMs = now;
+            }
+
+            await update(nodeRef, payload);
+          } catch (e) {
+            console.warn("Failed to mark listening open:", e);
+          }
+        }
+
+        goToProvider("listeningwords", name);
+      }
+
+      const adminOverlay = document.getElementById("adminOverlay");
+      const adminCloseBtn = document.getElementById("adminCloseBtn");
+      const adminSelect = document.getElementById("adminListeningSelect");
+      const adminPwInput = document.getElementById("adminPasswordInput");
+      const adminApplyBtn = document.getElementById("adminApplyBtn");
+      const adminForm = document.getElementById("adminForm");
+      const adminStatus = document.getElementById("adminStatus");
+      const adminPwToggle = document.getElementById("adminPwToggle");
+
+      function setAdminStatus(type, msg) {
+        if (!adminStatus) return;
+        adminStatus.innerHTML = "";
+        const iconName =
+          type === "success" ? "check-circle-2" :
+          type === "error"   ? "x-circle" :
+          "info";
+
+        const ico = document.createElement("i");
+        ico.setAttribute("data-lucide", iconName);
+        ico.setAttribute("size", "18");
+
+        const span = document.createElement("span");
+        span.textContent = String(msg || "");
+
+        adminStatus.appendChild(ico);
+        adminStatus.appendChild(span);
+
+        adminStatus.className = `admin-status ${type || "info"}`;
+        adminStatus.style.display = msg ? "flex" : "none";
+
+        try { lucide.createIcons(); } catch {}
+      }
+
+      function setApplyBusy(busy) {
+        if (!adminApplyBtn) return;
+        adminApplyBtn.disabled = !!busy;
+        if (busy) {
+          adminApplyBtn.dataset._label = adminApplyBtn.textContent || "Apply";
+          adminApplyBtn.innerHTML = '<i data-lucide="loader-2" size="20"></i><span>Saving...</span>';
+          try { lucide.createIcons(); } catch {}
+        } else {
+          adminApplyBtn.innerHTML = '<i data-lucide="sparkles" size="20"></i><span>Apply</span>';
+          try { lucide.createIcons(); } catch {}
+        }
+      }
+
+      adminPwToggle?.addEventListener("click", () => {
+        if (!adminPwInput) return;
+        const show = adminPwInput.type === "password";
+        adminPwInput.type = show ? "text" : "password";
+        adminPwToggle.innerHTML = show
+          ? '<i data-lucide="eye-off" size="18"></i>'
+          : '<i data-lucide="eye" size="18"></i>';
+        try { lucide.createIcons(); } catch {}
+        adminPwInput.focus();
+      });
+
+
+      function fillAdminSelect() {
+        if (!adminSelect) return;
+        adminSelect.innerHTML = "";
+        for (const n of _names) {
+          const opt = document.createElement("option");
+          opt.value = n;
+          opt.textContent = pretty(n) + (hasPassword(n) ? "  🔒" : "");
+          adminSelect.appendChild(opt);
+        }
+      }
+
+      function openAdminPanel() {
+        if (!adminOverlay) return;
+        fillAdminSelect();
+        adminOverlay.style.display = "flex";
+        adminOverlay.setAttribute("aria-hidden", "false");
+        try { lucide.createIcons(); } catch {}
+                if (adminPwInput) adminPwInput.type = "password";
+        if (adminPwToggle) adminPwToggle.innerHTML = '<i data-lucide="eye" size="18"></i>';
+        setAdminStatus("info", "Select a listening, set a password, then Apply. Leave it empty to remove.");
+        try { lucide.createIcons(); } catch {}
+        setTimeout(() => adminPwInput?.focus(), 60);
+      }
+
+      function closeAdminPanel() {
+        if (!adminOverlay) return;
+        adminOverlay.style.display = "none";
+        adminOverlay.setAttribute("aria-hidden", "true");
+        if (adminPwInput) adminPwInput.value = "";
+        setApplyBusy(false);
+        setAdminStatus("", "");
+      }
+
+      adminOverlay?.addEventListener("mousedown", (e) => {
+        if (e.target === adminOverlay) closeAdminPanel();
+      });
+      adminCloseBtn?.addEventListener("click", closeAdminPanel);
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && adminOverlay?.style.display === "flex") closeAdminPanel();
+      });
+
+      async function applyPassword() {
+        if (!_uid) { setAdminStatus("error", "Sign in required."); return; }
+        const name = adminSelect?.value;
+        if (!name) { setAdminStatus("error", "Pick a listening first."); return; }
+
+        const key = safeKey(name);
+        const pw = String(adminPwInput?.value || "").trim();
+
+        setApplyBusy(true);
+        setAdminStatus("info", "Savingâ€¦");
+
+        try {
+          const target = ref(db, `${PASSWORDS_PATH}/${key}`);
+
+          if (!pw) {
+            await set(target, null);
+            delete _pwMap[key];
+            setAdminStatus("success", "Password removed.");
+          } else {
+            const { saltHex, hashHex } = await makeSaltedHash(pw);
+            const payload = {
+              name,
+              saltHex,
+              hashHex,
+              updatedAt: Date.now(),
+              updatedBy: _uid,
+            };
+            await set(target, payload);
+            _pwMap[key] = payload;
+            setAdminStatus("success", "Password saved (hashed).");
+          }
+
+          if (adminPwInput) adminPwInput.value = "";
+          await renderListenings(_uid);
+        } catch (e) {
+          console.error(e);
+          const msg = String(e?.code || e?.message || "").toLowerCase();
+          if (msg.includes("permission_denied")) {
+            setAdminStatus(
+              "error",
+              "Permission denied. You must be admin to change the passwords"
+            );
+          } else {
+            setAdminStatus("error", "Failed to save password. Check rules / connection.");
+          }
+        } finally {
+          setApplyBusy(false);
+        }
+      }
+
+      adminForm?.addEventListener("submit", (e) => { e.preventDefault(); void applyPassword(); });
+
+      let adminBuffer = "";
+      let adminTimer = null;
+
+      document.addEventListener("keydown", (e) => {
+        const isCmdOrCtrl = e.ctrlKey || e.metaKey;
+        const combo = isCmdOrCtrl && e.shiftKey && e.altKey;
+        if (!combo) { adminBuffer = ""; return; }
+
+        const k = String(e.key).toUpperCase();
+        if (k.length === 1) e.preventDefault();
+
+        if (k.length === 1 && /[A-Z]/.test(k)) {
+          adminBuffer += k;
+          if (adminBuffer.length > 5) adminBuffer = adminBuffer.slice(-5);
+
+          if (adminTimer) clearTimeout(adminTimer);
+          adminTimer = setTimeout(() => { adminBuffer = ""; }, 1200);
+
+          if (adminBuffer === "ADMIN") {
+            adminBuffer = "";
+            openAdminPanel();
+          }
+        }
+      });
+
+
+      async function renderListenings(uid) {
+        _uid = uid;
+        showMessage("Loading listenings...");
+
+        const snap = await get(ref(db, "vocabularies/listeningwords"));
+        if (!snap.exists()) return showMessage("No listenings found in vocabularies/listeningwords");
+
+        const obj = snap.val() || {};
+        _names = Object.keys(obj).sort((a, b) => a.localeCompare(b));
+
+        await loadPasswordMap();
+
+        let progress = {};
+        try {
+          const pr = await get(ref(db, `students/${uid}/progress/vocabularies/listeningwords`));
+          progress = pr.exists() ? (pr.val() || {}) : {};
+        } catch (e) {
+          console.warn("Progress read failed:", e);
+        }
+
+        let stats = {};
+        try {
+          const st = await get(ref(db, `students/${uid}/stats/vocabTests/listeningwords`));
+          stats = st.exists() ? (st.val() || {}) : {};
+        } catch (e) {
+          console.warn("Stats read failed:", e);
+        }
+
+
+        let access = {};
+        try {
+          const ac = await get(ref(db, STUDENT_ACCESS_PATH(uid)));
+          access = ac.exists() ? (ac.val() || {}) : {};
+        } catch (e) {
+          console.warn("Access map read failed:", e);
+          access = {};
+        }
+
+        const syncUpdates = {};
+        for (const name of _names) {
+          const k = safeKey(name);
+          const aNode = (access && (access[k] || access[name])) || null;
+
+          const pnode = (progress && (progress[k] || progress[name])) || null;
+          const snode = (stats && (stats[k] || stats[name])) || null;
+
+          const completed = !!pnode?.completed;
+          const bestP = Number(pnode?.bestPercent || snode?.best?.bestPercent || 0);
+
+          const doneByScore = completed || bestP >= 80;
+          if (doneByScore && !aNode?.hasaccess) {
+            syncUpdates[`${STUDENT_ACCESS_PATH(uid)}/${k}/name`] = name;
+            syncUpdates[`${STUDENT_ACCESS_PATH(uid)}/${k}/hasaccess`] = true;
+            syncUpdates[`${STUDENT_ACCESS_PATH(uid)}/${k}/unlockedAt`] = Date.now();
+          }
+        }
+
+        if (Object.keys(syncUpdates).length) {
+          try {
+            await update(ref(db), syncUpdates);
+            for (const name of _names) {
+              const k = safeKey(name);
+              if (syncUpdates[`${STUDENT_ACCESS_PATH(uid)}/${k}/hasaccess`]) {
+                access[k] = { ...(access[k] || {}), name, hasaccess: true };
+              }
+            }
+          } catch (e) {
+            console.warn("hasaccess sync failed:", e);
+          }
+        }
+
+        _access = access;
+
+        const statusFor = (name) => {
+          const k = safeKey(name);
+
+          const aNode = (access && (access[k] || access[name])) || null;
+          if (aNode?.hasaccess) return "done";
+          if (aNode) return "progress";
+
+          const pnode = (progress && (progress[k] || progress[name])) || null;
+          const snode = (stats && (stats[k] || stats[name])) || null;
+
+          const completed = !!pnode?.completed;
+          const bestP = Number(pnode?.bestPercent || snode?.best?.bestPercent || 0);
+          const attempts = Number(pnode?.attempts || snode?.summary?.attempts || 0);
+
+          if (completed || bestP >= 80) return "done";
+          if (attempts > 0) return "progress";
+          return "todo";
+        };
+
+        header.textContent = `LISTENING MODULES (${_names.length})`;
+        wrap.innerHTML = "";
+
+        for (const name of _names) {
+          const btn = document.createElement("button");
+          const st = statusFor(name);
+          btn.textContent = pretty(name) + ((hasPassword(name) && st !== "done") ? "🔒" : "");
+          btn.title = name;
+          btn.classList.add(st);
+          btn.addEventListener("click", () => { void openListening(name); });
+          wrap.appendChild(btn);
+        }
+
+        if (adminOverlay?.style.display === "flex") fillAdminSelect();
+      }
+
+      onAuthStateChanged(auth, (user) => {
+        if (!user) {
+          location.href = "/pages/auth/reg.html";
+          return;
+        }
+        renderListenings(user.uid).catch((e) => {
+          console.error(e);
+          showMessage("Failed to load listenings (check rules / connection). ");
+        });
+      });
+
+      try { lucide.createIcons(); } catch {}
+    </script>
+    <script>
+        (function () {
+        function setHeaderH() {
+            var header = document.querySelector("header"); // <-- CHANGE if your header uses another wrapper
+            var h = header ? Math.ceil(header.getBoundingClientRect().height) : 0;
+            document.documentElement.style.setProperty("--headerH", h + "px");
+        }
+
+        function initBackFab() {
+            // optional: render lucide icon if lucide is loaded
+            try { if (window.lucide && window.lucide.createIcons) window.lucide.createIcons(); } catch(e){}
+
+            setHeaderH();
+            window.addEventListener("resize", setHeaderH);
+
+            // extra robust: track header size changes (fonts, responsive rows, etc.)
+            var header = document.querySelector("header");
+            if (header && "ResizeObserver" in window) {
+            new ResizeObserver(setHeaderH).observe(header);
+            }
+
+            var back = document.getElementById("backFab");
+            if (!back) return;
+
+            back.addEventListener("click", function (e) {
+            // keep normal browser behaviors (new tab, etc.)
+            if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+            e.preventDefault();
+            if (window.history && window.history.length > 1) window.history.back();
+            else window.location.href = back.getAttribute("href");
+            });
+        }
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initBackFab);
+        } else {
+            initBackFab();
+        }
+        })();
+    </script>
+<script src="/sw.js"></script>
+</body>
+</html>
+
