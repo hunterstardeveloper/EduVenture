@@ -125,9 +125,9 @@
 </head>
 <body>
     <a class="back-fab" id="backFab"
-    href="/pages/study_materials/study_materials.html"
-    aria-label="Go back">
-    <i data-lucide="arrow-left"></i><span>Back</span>
+      href="/pages/study_materials/study_materials.html"
+      data-parent-href="/pages/study_materials/study_materials.html" aria-label="Go back">
+      <i data-lucide="arrow-left"></i><span>Back</span>
     </a>
     <div class="overlay" id="overlay"></div>
     <div class="sidebar" id="sidebar">
@@ -258,43 +258,73 @@
     <script src="/pages/elements/script.js"></script>
     <script>
         (function () {
-        function setHeaderH() {
-            var header = document.querySelector("header"); // <-- CHANGE if your header uses another wrapper
+            function setHeaderH() {
+            var header = document.querySelector("header");
             var h = header ? Math.ceil(header.getBoundingClientRect().height) : 0;
             document.documentElement.style.setProperty("--headerH", h + "px");
-        }
+            }
 
-        function initBackFab() {
-            // optional: render lucide icon if lucide is loaded
-            try { if (window.lucide && window.lucide.createIcons) window.lucide.createIcons(); } catch(e){}
+            function normPath(p) {
+            return (p || "").split("?")[0].split("#")[0].replace(/\/+$/, "") || "/";
+            }
+
+            function parentPath(pathname) {
+            var p = normPath(pathname);
+            if (p === "/") return "/";
+
+            var parts = p.split("/").filter(Boolean);
+            // remove last segment (file OR folder)
+            parts.pop();
+            return "/" + (parts.length ? parts.join("/") + "/" : "");
+            }
+
+            function initBackFab() {
+            try { if (window.lucide && window.lucide.createIcons) window.lucide.createIcons(); } catch (e) {}
 
             setHeaderH();
             window.addEventListener("resize", setHeaderH);
 
-            // extra robust: track header size changes (fonts, responsive rows, etc.)
             var header = document.querySelector("header");
             if (header && "ResizeObserver" in window) {
-            new ResizeObserver(setHeaderH).observe(header);
+                new ResizeObserver(setHeaderH).observe(header);
             }
 
             var back = document.getElementById("backFab");
             if (!back) return;
 
+            var hubHref = back.getAttribute("href");                 // main target
+            var parentHref = back.getAttribute("data-parent-href");  // optional real parent page
+
             back.addEventListener("click", function (e) {
-            // keep normal browser behaviors (new tab, etc.)
-            if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+                // keep normal browser behaviors (new tab, etc.)
+                if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
 
-            e.preventDefault();
-            if (window.history && window.history.length > 1) window.history.back();
-            else window.location.href = back.getAttribute("href");
+                e.preventDefault();
+
+                var cur = normPath(window.location.pathname);
+                var hub = normPath(hubHref);
+
+                // If we're already on the hub page, go to parent
+                if (cur === hub) {
+                if (parentHref) {
+                    window.location.href = parentHref;
+                } else {
+                    // best-effort: go one folder up
+                    window.location.href = parentPath(cur);
+                }
+                return;
+                }
+
+                // Otherwise always go to hub (never history-based)
+                window.location.href = hubHref;
             });
-        }
+            }
 
-        if (document.readyState === "loading") {
+            if (document.readyState === "loading") {
             document.addEventListener("DOMContentLoaded", initBackFab);
-        } else {
+            } else {
             initBackFab();
-        }
+            }
         })();
     </script>
 
