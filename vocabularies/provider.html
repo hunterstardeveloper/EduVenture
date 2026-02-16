@@ -28,6 +28,7 @@
   <script type="module">
     import { auth, db, ref, get, update, serverTimestamp } from "/elements/firebase.js";
     import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+        import { setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
     const listEl = document.getElementById("words-list");
     const backBtn = document.getElementById("backBtn");
@@ -202,13 +203,16 @@ function showText(msg) {
       try { await touchProgress(uid, count); } catch (e) { console.warn('Progress write failed:', e); }
       try { await touchListeningAccess(uid); } catch (e) { console.warn('Listening access write failed:', e); }
     }
+        try { await setPersistence(auth, browserLocalPersistence); } catch (e) {}
 
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) {
-        location.href = "/pages/auth/reg.html";
-        return;
-      }
-      try {
+        onAuthStateChanged(auth, async (user) => {
+      if (!user) { const ret = location.href;
+  try { sessionStorage.setItem("edu_return_url", ret); } catch (e) {}
+  try { localStorage.setItem("edu_return_url", ret); } catch (e) {}
+  location.replace(`/pages/auth/reg.html?return=${encodeURIComponent(ret)}`);
+  return;
+}
+try {
         await load(user.uid);
       } catch (e) {
         console.error(e);

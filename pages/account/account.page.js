@@ -1247,8 +1247,14 @@ window.handleLogout = async function handleLogout() {
     const ok = window.confirm("Are you sure you want to sign out?");
     if (!ok) return;
     await signOut(auth);
-    window.location.replace("/pages/auth/reg.html");
-  } catch (e) {
+    {
+  const ret = location.href;
+  try { sessionStorage.setItem("edu_return_url", ret); } catch (e) {}
+  try { localStorage.setItem("edu_return_url", ret); } catch (e) {}
+  location.replace(`/pages/auth/reg.html?return=${encodeURIComponent(ret)}`);
+  return;
+}
+} catch (e) {
     console.error(e);
     Toast.show("Logout failed.", "error");
   }
@@ -1322,9 +1328,14 @@ async function init() {
 
   onAuthStateChanged(auth, async (user) => {
     if (!user) {
-      window.location.replace("/pages/auth/reg.html");
-      return;
-    }
+      {
+  const ret = location.href;
+  try { sessionStorage.setItem("edu_return_url", ret); } catch (e) {}
+  try { localStorage.setItem("edu_return_url", ret); } catch (e) {}
+  location.replace(`/pages/auth/reg.html?return=${encodeURIComponent(ret)}`);
+  return;
+}
+}
     currentUser = user;
     await bootForUser(user);
   });

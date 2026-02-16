@@ -6,56 +6,108 @@
   --accent-blue: #2563eb;
   --success-green: #059669;
   --danger-red: #dc2626;
+
+  --page-pad: 28px;
+  --card-radius: 14px;
+  --shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 8px 24px rgba(17, 24, 39, 0.08);
+  --nav-bg: rgba(249, 250, 251, 0.92);
 }
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Open Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   background: var(--bg-light);
   color: var(--primary-dark);
-  padding: 28px;
+  padding: var(--page-pad);
   margin: 0;
+  min-height: 100dvh;
+  scroll-padding-top: calc(var(--page-pad) + 110px);
 }
 
-h1, h2 { 
-  margin: 6px 0 14px 0; 
+
+h1, h2 {
+  margin: 0 0 12px 0;
 }
+
+h1 {
+  font-size: clamp(22px, 3.2vw, 34px);
+  letter-spacing: 0.4px;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: clamp(18px, 2.2vw, 26px);
+  line-height: 1.25;
+}
+
+h3 {
+  margin: 18px 0 10px;
+}
+
+h4 {
+  margin: 18px 0 8px;
+}
+
 
 .container {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 20px;
-  align-items: start;
-  max-width: 100%;
+  align-items: stretch;
+  max-width: 1900px;
+  width: 100%;
+  margin: 0 auto;
+  flex: 1;
+  min-height: 0;
 }
 
+
 select {
-  padding: 5px 3px;
-  border-radius: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
   width: 100%;
   box-sizing: border-box;
   border: 1px solid var(--border);
+  background: #fff;
+  font-size: 15px;
 }
+
 
 .passage-box {
   -webkit-touch-callout: none;
   user-select: text;
   background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  line-height: 1.7;
-  max-height: 100vh;
+  padding: 22px;
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-soft);
+  line-height: 1.8;
   overflow: auto;
   border: 1px solid var(--border);
+  scrollbar-gutter: stable;
 }
+
 
 .controls {
   background: #fff;
-  padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  padding: 18px;
+  border-radius: var(--card-radius);
+  box-shadow: 0 2px 10px rgba(17, 24, 39, 0.06);
   border: 1px solid var(--border);
+  overflow: auto;
+  scrollbar-gutter: stable;
 }
+
 
 table {
   width: 100%;
@@ -95,8 +147,6 @@ input[type="text"] {
   box-sizing: border-box;
 }
 
-/* --- DYNAMIC BUTTON LAYOUT --- */
-/* Added flex-nowrap to prevent dropping */
 .controls div[style*="margin-top:12px"] {
   display: flex !important;
   flex-direction: row !important;
@@ -164,27 +214,33 @@ button:hover {
 }
 
 .lofi-toggle {
-  max-width: 300px;
-  display: flex;
-  background: transparent;
+  flex: 0 1 auto;
+  width: auto;
+  white-space: nowrap;
+  background: #fff;
   color: var(--primary-dark);
-  border: 2px solid var(--primary-dark);
-  transition: 0.4s all;
-  padding: 12px 16px; 
-  flex: 1;
-  align-items: center;
+  border: 1px solid var(--border);
+  padding: 22px 46px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 15px;
+  margin-top: 0 !important;
+  box-shadow: 0 2px 8px rgba(17, 24, 39, 0.06);
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  transform: none !important;
   justify-content: center;
-  margin-top: 0 !important; /* Forces top-alignment in navbar */
+  gap: 10px;
 }
+
 
 .lofi-toggle:hover {
   background: var(--bg-light);
-  color: var(--primary-dark);
-  border: 2px solid var(--text-muted);
-  transform: scale(1.05);
+  border-color: #cbd5e1;
+  box-shadow: 0 10px 20px rgba(17, 24, 39, 0.10);
+  transform: none !important;
 }
 
-/* FIXED: Changed gap to px and added nowrap */
+
 .button-group{
   display: flex !important;
   flex-direction: row !important;
@@ -193,19 +249,20 @@ button:hover {
   width: 100%;
 }
 
-nav {
-  position: sticky;
-  top: 0;
-  background: var(--bg-light);
-  z-index: 100;
-  padding: 10px 0;
-  margin-bottom: 30px;
+nav.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  flex-wrap: nowrap;
 }
 
+
+
 .navbar {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  display: grid;
+  grid-template-columns: auto 1fr auto; 
   justify-content: space-between;
   gap: 10px;
   width: 100%;
@@ -217,6 +274,8 @@ nav {
   font-size: 28px;
   font-weight: bold;
   color: var(--success-green);
+  text-align: center;
+  white-space: nowrap;
 }
 
 .wrap-of-time {
@@ -251,9 +310,6 @@ li {
   line-height: 1.6;
 }
 
-/* =====================================================
-   ✅ FLOATING SELECTION BAR STYLES
-   ===================================================== */
 
 .selection-bar {
   position: fixed;
@@ -288,7 +344,6 @@ li {
   cursor: pointer;
 }
 
-/* ✅ MATCHED TO var(--success-green) */
 .selection-bar .mark-btn {
   background-color: var(--success-green);
   color: white;
@@ -299,7 +354,6 @@ li {
   transform: translateY(-2px);
 }
 
-/* ✅ MATCHED TO var(--danger-red) */
 .selection-bar .unmark-btn {
   background-color: var(--danger-red);
   color: white;
@@ -328,9 +382,6 @@ li {
   height: 16px;
 }
 
-/* =====================================================
-   ✅ ANIMATIONS
-   ===================================================== */
 
 @keyframes markPulse {
   0% { transform: scale(1); background-color: transparent; }
@@ -349,44 +400,69 @@ li {
   border-radius: 3px;
 }
 
-/* =====================================================
-   ✅ SELECTION HIGHLIGHT STYLING
-   ===================================================== */
 ::selection { background-color: rgba(0, 255, 221, 0.582); color: var(--primary-dark); }
 ::-moz-selection { background-color: rgba(0, 255, 221, 0.829); color: var(--primary-dark); }
 
-/* Mobile / Tablet */
-@media (max-width: 980px) {
-  .container { grid-template-columns: 1fr; }
-  nav { margin: 0 0 20px 0; }
+
+@media (min-width : 2000px){
+  .container{
+    max-width: 2700px;
+  }
 }
 
-@media (max-width: 768px) {
-  body { padding: 15px; }
-  .container { grid-template-columns: 1fr; gap: 15px; }
-  .passage-box, .controls { padding: 15px; }
-  
-  /* FIXED: Added nowrap to mobile nav as well */
-  .navbar {
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    gap: 5px !important;
+@media (min-width: 981px) {
+  html, body { height: 100%; }
+  body {
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
-  
+  .container { flex: 1 1 auto; min-height: 0; }
+  .passage-box, .controls { height: 100%; max-height: none; }
+}
+@media (max-width: 980px) {
+  :root { --page-pad: 18px; }
+  .container { grid-template-columns: 1fr; }
+  nav.navbar { margin-bottom: 14px; }
+}
+
+
+@media (max-width: 768px) {
+  :root { --page-pad: 14px; }
+
+  .container { grid-template-columns: 1fr; gap: 14px; }
+  .passage-box, .controls { padding: 16px; }
+
+  nav.navbar {
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+
+  .navbar { 
+    gap: 8px; 
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .lofi-toggle {
+    flex: 0 1 auto !important;
+    width: auto;
+    max-width: none;
+    font-size: 14px;
+    padding: 12px 14px;
+  }
+
   .timer-container { font-size: 24px; }
   table { font-size: 14px; display: block; overflow-x: auto; white-space: nowrap; }
   th, td { padding: 8px; font-size: 14px; }
-  
-  button { 
-    padding: 12px 5px !important; 
-    font-size: 11px !important; 
-  }
-  
+
+  .button-group { flex-wrap: wrap !important; gap: 10px !important; }
+
   .selection-bar {
     flex-direction: column;
-    gap: 6px;
-    padding: 6px;
-    max-width: 90vw;
+    gap: 8px;
+    padding: 8px;
+    max-width: 92vw;
   }
   .selection-bar button {
     padding: 12px 16px;
@@ -396,8 +472,10 @@ li {
   }
 }
 
+
 @media (max-width: 480px) {
-  body { padding: 10px; }
-  .passage-box, .controls { padding: 12px; border-radius: 8px; }
+  :root { --page-pad: 10px; }
+  .passage-box, .controls { padding: 14px; border-radius: 12px; }
   .timer-container { font-size: 20px; }
+  .lofi-toggle { flex: 0 1 auto !important; width: auto; }
 }

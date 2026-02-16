@@ -663,9 +663,14 @@ async function boot() {
 
   onAuthStateChanged(auth, async (user) => {
     if (!user) {
-      window.location.replace("/pages/auth/reg.html");
-      return;
-    }
+      {
+  const ret = location.href;
+  try { sessionStorage.setItem("edu_return_url", ret); } catch (e) {}
+  try { localStorage.setItem("edu_return_url", ret); } catch (e) {}
+  location.replace(`/pages/auth/reg.html?return=${encodeURIComponent(ret)}`);
+  return;
+}
+}
     currentUser = user;
     try { myProfile = await loadMyProfile(user.uid); } catch (e) { myProfile = {}; }
     

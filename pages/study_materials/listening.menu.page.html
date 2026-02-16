@@ -252,6 +252,7 @@
     <script type="module">
         import { auth, db, ref, get } from "/elements/firebase.js";
         import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+        import { setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
         function statusForTest(testObj, expectedParts = 4, partPrefix = "sec") {
             if (!testObj || typeof testObj !== "object") return "todo";
@@ -266,10 +267,16 @@
             if (completed < expectedParts) return "progress";
             return "done";
         }
+        try { await setPersistence(auth, browserLocalPersistence); } catch (e) {}
 
         onAuthStateChanged(auth, async (user) => {
-            if (!user) { location.href = "/pages/auth/reg.html"; return; }
-            const uid = user.uid;
+            if (!user) { const ret = location.href;
+  try { sessionStorage.setItem("edu_return_url", ret); } catch (e) {}
+  try { localStorage.setItem("edu_return_url", ret); } catch (e) {}
+  location.replace(`/pages/auth/reg.html?return=${encodeURIComponent(ret)}`);
+  return;
+}
+const uid = user.uid;
 
             let listeningProgress = {};
             try {

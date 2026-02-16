@@ -271,6 +271,35 @@ function authErrorToHuman(err) {
   return err?.message || "Something went wrong.";
 }
 
+
+/* -----------------------
+   Return URL handling
+----------------------- */
+function getReturnUrlFallback() {
+  try {
+    const url = new URL(window.location.href);
+    const q = url.searchParams.get("return");
+    const stored = sessionStorage.getItem("edu_return_url") || localStorage.getItem("edu_return_url");
+    const raw = q || stored;
+    if (!raw) return "";
+    const u = new URL(raw, window.location.origin);
+    // only allow same-origin navigations
+    if (u.origin !== window.location.origin) return "";
+    return u.toString();
+  } catch {
+    return "";
+  }
+}
+function clearReturnUrl() {
+  try { sessionStorage.removeItem("edu_return_url"); } catch {}
+  try { localStorage.removeItem("edu_return_url"); } catch {}
+}
+function goAfterAuth(defaultPath = "/pages/home/home page.html") {
+  const target = getReturnUrlFallback() || defaultPath;
+  clearReturnUrl();
+  window.location.replace(target);
+}
+
 /* -----------------------
    Telegram notify (signup)
    NOTE: Don't ship bot token in public sites. Use a server/proxy in production.
@@ -419,7 +448,7 @@ async function initAuthGuard() {
 
     // âœ… FIX: don't redirect while we are in the middle of signup/login
     if (user && !isSubmitting) {
-      window.location.replace("/pages/home/home page.html");
+      goAfterAuth("/pages/home/home page.html");
       return;
     }
 
@@ -548,7 +577,7 @@ form?.addEventListener("submit", async (e) => {
       }
 
       Toast.show("Account created âœ…", "s");
-      window.location.replace("/pages/home/home page.html");
+      goAfterAuth("/pages/home/home page.html");
     } else {
       // Login: username â†’ direct synthetic email, phone â†’ resolve to uid â†’ profile.email
       let loginEmail = email;
@@ -574,7 +603,7 @@ form?.addEventListener("submit", async (e) => {
       // PERF: skip RTDB writes on login (faster on slow internet).
       // The account page already ensures the student profile/stats exist.
       Toast.show("Welcome back âœ…", "s");
-      window.location.replace("/pages/home/home page.html");
+      goAfterAuth("/pages/home/home page.html");
     }
   } catch (err) {
     console.error(err);

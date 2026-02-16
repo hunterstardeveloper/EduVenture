@@ -2949,12 +2949,13 @@ const uids = getRoomUids(room);
     await loadFirebase();
 
     onAuthStateChanged(fb.auth, async (user) => {
-      if (!user) {
-        location.href = "/pages/auth/reg.html";
-        return;
-      }
-
-      state.user = user;
+      if (!user) { const ret = location.href;
+  try { sessionStorage.setItem("edu_return_url", ret); } catch (e) {}
+  try { localStorage.setItem("edu_return_url", ret); } catch (e) {}
+  location.replace(`/pages/auth/reg.html?return=${encodeURIComponent(ret)}`);
+  return;
+}
+state.user = user;
       state.uid = user.uid;
 
       const ctx = resolveContextOrRedirect();

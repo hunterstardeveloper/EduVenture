@@ -281,6 +281,7 @@
     <script type="module">
       import { auth, db, ref, get } from "/elements/firebase.js";
       import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+        import { setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
       const PROVIDER_PATH = "/vocabularies/provider.html";
       const header = document.querySelector(".glass-header h2");
@@ -360,13 +361,16 @@
           wrap.appendChild(btn);
         }
       }
+        try { await setPersistence(auth, browserLocalPersistence); } catch (e) {}
 
-      onAuthStateChanged(auth, (user) => {
-        if (!user) {
-          location.href = "/pages/auth/reg.html";
-          return;
-        }
-        renderUnits(user.uid).catch((e) => {
+        onAuthStateChanged(auth, (user) => {
+        if (!user) { const ret = location.href;
+  try { sessionStorage.setItem("edu_return_url", ret); } catch (e) {}
+  try { localStorage.setItem("edu_return_url", ret); } catch (e) {}
+  location.replace(`/pages/auth/reg.html?return=${encodeURIComponent(ret)}`);
+  return;
+}
+renderUnits(user.uid).catch((e) => {
           console.error(e);
           showMessage("Failed to load units (check rules / connection). ");
         });

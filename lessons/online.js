@@ -738,9 +738,14 @@ async function loadMyProfile() {
 
 async function sendComment() {
   if (!currentUser) {
-    window.location.href = "/pages/auth/reg.html";
-    return;
-  }
+    {
+  const ret = location.href;
+  try { sessionStorage.setItem("edu_return_url", ret); } catch (e) {}
+  try { localStorage.setItem("edu_return_url", ret); } catch (e) {}
+  location.replace(`/pages/auth/reg.html?return=${encodeURIComponent(ret)}`);
+  return;
+}
+}
   if (!selectedModuleId) {
     alert("Avval darsni tanlang.");
     return;
@@ -1120,9 +1125,14 @@ onAuthStateChanged(auth, async (user) => {
 
   if (!currentUser) {
     setAuthHint();
-    window.location.href = "/pages/auth/reg.html";
-    return;
-  }
+    {
+  const ret = location.href;
+  try { sessionStorage.setItem("edu_return_url", ret); } catch (e) {}
+  try { localStorage.setItem("edu_return_url", ret); } catch (e) {}
+  location.replace(`/pages/auth/reg.html?return=${encodeURIComponent(ret)}`);
+  return;
+}
+}
 
   isAdmin = await checkAdmin(currentUser.uid);
   setAuthHint();
