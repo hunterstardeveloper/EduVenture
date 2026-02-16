@@ -272,6 +272,151 @@ async function releasePhoneIfOwned(phoneKeyDigits, uid) {
   }
 }
 
+/* -----------------------------
+   Username index helpers (unique usernames)
+----------------------------- */
+function usernameIndexRef(uname) {
+  return ref(rtdb, `usernames/${uname}`);
+}
+function usernameIndexRefStudents(uname) {
+  return ref(rtdb, `students/usernames/${uname}`);
+}
+
+// idempotent: if already claimed by same uid, keep it
+async function claimUsernameOrThrow(uname, uid) {
+  const res = await runTransaction(usernameIndexRef(uname), (current) => {
+    if (current == null) return uid;
+    if (current === uid) return current;
+    return; // abort (taken)
+  });
+
+  if (!res.committed) throw new Error("username_taken");
+
+  // Mirror to legacy path too (some older pages may still read it)
+  await update(ref(rtdb), {
+    [`students/usernames/${uname}`]: uid,
+  });
+}
+
+async function releaseUsernameIfOwned(uname, uid) {
+  if (!uname) return;
+  try {
+    const snap = await get(usernameIndexRef(uname));
+    if (snap.exists() && String(snap.val() || "") === uid) {
+      await update(ref(rtdb), {
+        [`usernames/${uname}`]: null,
+        [`students/usernames/${uname}`]: null,
+      });
+    }
+  } catch {
+    // ignore
+  }
+}
+
+function hasPasswordProvider(user) {
+  return (
+    Array.isArray(user?.providerData) &&
+    user.providerData.some((p) => p?.providerId === "password")
+  );
+}
+
+function promptPasswordModal({ title, message, confirmText = "Confirm", cancelText = "Cancel" } = {}) {
+  return new Promise((resolve) => {
+    const modal = document.createElement("div");
+    modal.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+    `;
+
+    const modalContent = document.createElement("div");
+    modalContent.style.cssText = `
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      max-width: 450px;
+      width: 90%;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    `;
+
+    modalContent.innerHTML = `
+      <h2 style="margin:0 0 8px 0; font-size:22px; color:#111827;">${title || "Confirm"}</h2>
+      <p style="margin:0 0 18px 0; color:#6b7280; font-size:14px;">${message || ""}</p>
+
+      <div style="margin-bottom: 18px;">
+        <label style="display:block; font-size:14px; font-weight:600; margin-bottom:8px; color:#111827;">Password</label>
+        <input type="password" id="confirmPasswordOnly" placeholder="Enter your password"
+          style="width: 100%; padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 16px; box-sizing: border-box;">
+      </div>
+
+      <div style="display:flex; gap:10px; justify-content:flex-end;">
+        <button id="cancelConfirm" style="padding: 10px 20px; border: 1px solid #e5e7eb; background: white; color: #111827; border-radius: 8px; font-weight: 600; cursor: pointer;">
+          ${cancelText}
+        </button>
+        <button id="confirmConfirm" style="padding: 10px 20px; border: none; background: #1f2937; color: white; border-radius: 8px; font-weight: 600; cursor: pointer;">
+          ${confirmText}
+        </button>
+      </div>
+    `;
+
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+
+    const input = modalContent.querySelector("#confirmPasswordOnly");
+    const cancelBtn = modalContent.querySelector("#cancelConfirm");
+    const confirmBtn = modalContent.querySelector("#confirmConfirm");
+
+    const close = (value) => {
+      try { modal.remove(); } catch {}
+      resolve(value);
+    };
+
+    cancelBtn.addEventListener("click", () => close(null));
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) close(null);
+    });
+
+    confirmBtn.addEventListener("click", () => {
+      const v = String(input?.value || "").trim();
+      if (!v) {
+        Toast.show("Please enter your password.", "error", 3200);
+        return;
+      }
+      close(v);
+    });
+
+    setTimeout(() => input?.focus(), 80);
+  });
+}
+
+async function updateEmailWithReauth(user, oldEmail, newEmail) {
+  try {
+    await updateEmail(user, newEmail);
+  } catch (e) {
+    if (e?.code !== "auth/requires-recent-login") throw e;
+
+    const pwd = await promptPasswordModal({
+      title: "Confirm username change",
+      message: "For security, please enter your password to change your username.",
+      confirmText: "Confirm",
+    });
+
+    if (!pwd) throw e;
+
+    const credential = EmailAuthProvider.credential(oldEmail, pwd);
+    await reauthenticateWithCredential(user, credential);
+    await updateEmail(user, newEmail);
+  }
+}
+
+
 async function ensureStudentDoc(user) {
   const uid = user.uid;
 
@@ -442,7 +587,12 @@ function renderProfile(user, profile) {
   const editGroup = $id("editGroup");
 
   if (editName) editName.value = name;
-  if (editEmail) editEmail.value = username || email;
+  let editUsername = username;
+  if (!editUsername) {
+    const em = String(email || "");
+    if (em.endsWith("@eduventure.local")) editUsername = normalizeUsername(em.split("@")[0] || "");
+  }
+  if (editEmail) editEmail.value = editUsername || "";
   if (editPhone) editPhone.value = phone;
   if (editGroup) editGroup.value = group;
 }
@@ -758,20 +908,41 @@ function setupProfileEditing() {
     saveBtn.textContent = "Saving...";
     saveBtn.disabled = true;
 
+    let usernameClaimed = false;
+    let claimedUsername = "";
+    let phoneClaimed = false;
+    let profileCommitted = false;
+
     try {
       const oldAuthEmail = String(currentUser.email || "").trim();
       const oldName = String(currentUser.displayName || "").trim();
 
-      const desiredAuthEmail = usernameToEmail(newUsername);
+      const oldUsername =
+        normalizeUsername(cachedProfile?.username || "") ||
+        (oldAuthEmail && oldAuthEmail.endsWith("@eduventure.local")
+          ? normalizeUsername(oldAuthEmail.split("@")[0] || "")
+          : "");
 
-      // Phone index (login by phone). Claim new number if changed.
-      if (newPhoneKey && newPhoneKey !== oldPhoneKey) {
-        await claimPhoneOrThrow(newPhoneKey, uid);
+      const desiredAuthEmail = usernameToEmail(newUsername);
+      const isUsernameChange = newUsername !== oldUsername;
+
+      // 1) Reserve username (prevents duplicates)
+      if (isUsernameChange) {
+        await claimUsernameOrThrow(newUsername, uid);
+        usernameClaimed = true;
+        claimedUsername = newUsername;
       }
 
-      // Save group even if username change fails
+      // 2) Phone index (login by phone). Claim new number if changed.
+      if (newPhoneKey && newPhoneKey !== oldPhoneKey) {
+        await claimPhoneOrThrow(newPhoneKey, uid);
+        phoneClaimed = true;
+      }
+
+      // 3) Save group/name even if auth email (login username) change fails
       let nameErr = null;
       let emailErr = null;
+      let emailChanged = false;
 
       if (newName !== oldName) {
         try {
@@ -781,16 +952,33 @@ function setupProfileEditing() {
         }
       }
 
-      if (desiredAuthEmail !== oldAuthEmail) {
+      // Only change Auth email when this is an email+password account that uses the synthetic email scheme.
+      const shouldChangeAuthEmail =
+        isUsernameChange &&
+        hasPasswordProvider(currentUser) &&
+        oldAuthEmail &&
+        oldAuthEmail.endsWith("@eduventure.local");
+
+      if (shouldChangeAuthEmail && desiredAuthEmail !== oldAuthEmail) {
         try {
-          await updateEmail(currentUser, desiredAuthEmail);
+          await updateEmailWithReauth(currentUser, oldAuthEmail, desiredAuthEmail);
+          emailChanged = true;
         } catch (e) {
           emailErr = e;
         }
       }
 
-      const usernameToStore = emailErr ? (cachedProfile?.username || oldAuthEmail.split("@")[0] || "") : newUsername;
-      const emailToStore = emailErr ? oldAuthEmail : desiredAuthEmail;
+      // If auth email change failed, rollback reserved username (so we don't lock it)
+      if (emailErr && usernameClaimed) {
+        await releaseUsernameIfOwned(claimedUsername, uid);
+        usernameClaimed = false;
+        claimedUsername = "";
+      }
+
+      const usernameToStore = emailErr ? oldUsername : newUsername;
+      const emailToStore = emailChanged
+        ? desiredAuthEmail
+        : String(cachedProfile?.email || oldAuthEmail || "");
 
       await update(studentProfileRef(uid), {
         name: newName,
@@ -800,6 +988,12 @@ function setupProfileEditing() {
         group_name: newGroup,
         group: newGroup,
       });
+      profileCommitted = true;
+
+      // Release old username mapping only after successful commit
+      if (!emailErr && isUsernameChange) {
+        await releaseUsernameIfOwned(oldUsername, uid);
+      }
 
       await loadStudentData(uid);
       renderProfile(currentUser, cachedProfile);
@@ -813,18 +1007,47 @@ function setupProfileEditing() {
       profileEditForm.style.display = "none";
 
       if (emailErr?.code === "auth/requires-recent-login") {
-        Toast.show("Profile saved ✅ (group included). To change username, sign out & sign in again.", "info", 4200);
+        Toast.show(
+          "Saved ✅ (group included). To change username for login, sign out & sign in again.",
+          "info",
+          4600
+        );
       } else if (emailErr) {
-        Toast.show("Profile saved ✅ (group included), but username change failed. See console.", "info", 4200);
+        console.error("Username(auth email) change failed:", emailErr);
+        if (emailErr.code === "auth/email-already-in-use") {
+          Toast.show("That username is already taken.", "error", 4200);
+        } else if (emailErr.code === "auth/invalid-email") {
+          Toast.show("That username produced an invalid login email.", "error", 4200);
+        } else {
+          Toast.show("Saved ✅, but username change failed. Check console.", "info", 4200);
+        }
       } else if (nameErr) {
-        Toast.show("Saved ✅ (group included), but display name update failed. See console.", "info", 4200);
+        console.error("Display name update failed:", nameErr);
+        Toast.show("Saved ✅, but display name update failed. Check console.", "info", 4200);
+      } else if (!shouldChangeAuthEmail && isUsernameChange) {
+        // Phone/Google users: username is only for profile display
+        Toast.show("Username saved ✅ (login method unchanged).", "success", 3600);
       } else {
         Toast.show("Saved ✅", "success");
       }
     } catch (err) {
       console.error(err);
+
+      // Best-effort rollback if we failed before committing the profile update
+      try {
+        if (!profileCommitted) {
+          if (usernameClaimed && claimedUsername) {
+            await releaseUsernameIfOwned(claimedUsername, uid);
+          }
+          if (phoneClaimed && newPhoneKey && newPhoneKey !== oldPhoneKey) {
+            await releasePhoneIfOwned(newPhoneKey, uid);
+          }
+        }
+      } catch {}
       if (err?.message === "phone_taken") {
         Toast.show("That phone number is already registered.", "error", 4200);
+      } else if (err?.message === "username_taken") {
+        Toast.show("That username is already taken.", "error", 4200);
       } else {
         Toast.show("Could not save. Check console.", "error", 4000);
       }
