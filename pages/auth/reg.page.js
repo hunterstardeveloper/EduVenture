@@ -432,16 +432,10 @@ function setMode(loginMode) {
   if (toggleTextEl)
     toggleTextEl.textContent = isLoginMode ? "Don't have an account?" : "Already have an account?";
 
-  // Google CTA + row links to match other auth pages
   if (googleText) {
     googleText.textContent = isLoginMode ? "Continue with Google" : "Sign up with Google";
   }
-  if (altAuthLink) {
-    altAuthLink.textContent = isLoginMode ? "Create account" : "Already have an account?";
-    altAuthLink.href = isLoginMode ? "/auth/register.html" : "/auth/login.html";
-  }
   if (forgotLink) {
-    // Only useful on login mode
     forgotLink.style.display = isLoginMode ? "" : "none";
   }
 
