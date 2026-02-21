@@ -6,6 +6,8 @@ import {
   browserLocalPersistence,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
   updateProfile,
   deleteUser,
 } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
@@ -101,6 +103,11 @@ const passwordInput = document.getElementById("password");
 const submitBtn = document.getElementById("submit-btn");
 const loginToggleBtn = document.getElementById("loginBtn");
 const toggleTextEl = document.getElementById("toggle-text");
+
+const googleBtn = document.getElementById("googleBtn");
+const googleText = document.getElementById("googleText");
+const forgotLink = document.getElementById("forgotLink");
+const altAuthLink = document.getElementById("altAuthLink");
 
 const form = document.querySelector(".registration-form");
 
@@ -425,6 +432,19 @@ function setMode(loginMode) {
   if (toggleTextEl)
     toggleTextEl.textContent = isLoginMode ? "Don't have an account?" : "Already have an account?";
 
+  // Google CTA + row links to match other auth pages
+  if (googleText) {
+    googleText.textContent = isLoginMode ? "Continue with Google" : "Sign up with Google";
+  }
+  if (altAuthLink) {
+    altAuthLink.textContent = isLoginMode ? "Create account" : "Already have an account?";
+    altAuthLink.href = isLoginMode ? "/auth/register.html" : "/auth/login.html";
+  }
+  if (forgotLink) {
+    // Only useful on login mode
+    forgotLink.style.display = isLoginMode ? "" : "none";
+  }
+
   // Clear irrelevant fields in login mode
   if (isLoginMode) {
     if (firstNameInput) firstNameInput.value = "";
@@ -436,6 +456,99 @@ function setMode(loginMode) {
 }
 
 loginToggleBtn?.addEventListener("click", () => setMode(!isLoginMode));
+
+/* -----------------------
+   Google auth (Sign in / Sign up)
+----------------------- */
+googleBtn?.addEventListener("click", async () => {
+  // Don't let auth-guard redirect mid-flow
+  isSubmitting = true;
+  googleBtn.disabled = true;
+
+  try {
+    // Ensure persistence is set (in case user clicks fast)
+    await setPersistence(auth, browserLocalPersistence);
+
+    // If signing up with Google, require the extra profile fields used in this app
+    let firstName = "";
+    let lastName = "";
+    let selectedGroup = "";
+    let phoneExtraNorm = "";
+    if (!isLoginMode) {
+      firstName = String(firstNameInput?.value || "").trim();
+      lastName = String(lastNameInput?.value || "").trim();
+      selectedGroup = String(groupInput?.value || "").trim();
+      phoneExtraNorm = normalizePhone(phoneInput?.value || "");
+
+      if (!firstName || !lastName) {
+        Toast.show("Please enter your first & last name before continuing with Google.", "e", 4200);
+        return;
+      }
+      if (!selectedGroup) {
+        Toast.show("Please enter your group before continuing with Google.", "e", 4200);
+        return;
+      }
+      if (phoneExtraNorm && !isValidPhone(phoneExtraNorm)) {
+        Toast.show("Phone Number (optional) looks invalid.", "e", 4200);
+        return;
+      }
+    }
+
+    const provider = new GoogleAuthProvider();
+    const res = await signInWithPopup(auth, provider);
+    const user = res?.user;
+    if (!user) throw new Error("Google sign-in failed");
+
+    // Keep app's student record consistent
+    if (!isLoginMode) {
+      const fullName = buildFullName(firstName, lastName);
+      if (fullName) {
+        try { await updateProfile(user, { displayName: fullName }); } catch {}
+      }
+
+      // Reserve phone (if provided) so login-by-phone works later
+      if (phoneExtraNorm) {
+        await claimPhoneOrThrow(phoneKey(phoneExtraNorm), user.uid);
+      }
+
+      await ensureStudentRecord(user, {
+        username: "", // Google users don't need a username
+        first_name: firstName,
+        last_name: lastName,
+        name: fullName,
+        email: user.email || "",
+        phone: phoneExtraNorm || "",
+        group_name: selectedGroup,
+        group: selectedGroup,
+      });
+
+      // Telegram notify (optional)
+      try {
+        const msg = buildTelegramRegistrationMsg({
+          uid: user.uid,
+          fullName,
+          usernameLower: "",
+          phone: phoneExtraNorm || "",
+          group: selectedGroup,
+        });
+        await tgSendMessage(msg);
+      } catch (e) {
+        console.warn("Telegram notify failed:", e?.message || e);
+      }
+    } else {
+      // login mode: ensure profile exists (idempotent)
+      await ensureStudentRecord(user, { email: user.email || "" });
+    }
+
+    Toast.show("Signed in with Google âœ…", "s");
+    goAfterAuth("/pages/home/home page.html");
+  } catch (e) {
+    Toast.show(authErrorToHuman(e), "e", 4600);
+  } finally {
+    googleBtn.disabled = false;
+    isSubmitting = false;
+  }
+});
 
 /* -----------------------
    Auth guard

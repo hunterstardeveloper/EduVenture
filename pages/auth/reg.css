@@ -109,6 +109,45 @@
         }
         .reg-btn:hover { background: #0f172a; transform: scale(1.01); }
 
+        /* Divider + Google button (match login/register pages) */
+        .divider{display:flex;align-items:center;gap:12px;margin:16px 0 10px;color:#64748b;font-size:13px}
+        .divider::before,.divider::after{content:"";height:1px;flex:1;background:rgba(15,23,42,0.12)}
+        .divider span{padding:0 6px}
+
+        .google-btn{
+            width:100%;
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            color:#0f172a;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+            transition: all 0.2s;
+        }
+        .google-btn:hover{background:#fff;transform: scale(1.01);border-color: rgba(37,99,235,0.45)}
+        .google-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+        .google-ico{width:18px;height:18px}
+
+        .row-links{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:12px;
+            margin-top:12px;
+            font-size:13px;
+        }
+        .row-links a{color:#2563eb;text-decoration:none;font-weight:600}
+        .row-links a:hover{text-decoration:underline}
+
+        /* Hidden by default; JS shows it in login mode */
+        #forgotLink{display:none}
+
         #loginBtn {
             color: #2563eb;
             font-weight: 600;
