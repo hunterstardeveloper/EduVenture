@@ -32,7 +32,6 @@ function normalizeUsername(raw) {
   return String(raw || "").trim().toLowerCase().replace(/\s+/g, "");
 }
 
-
 function normalizePhone(raw) {
   const s = String(raw || "").trim();
   if (!s) return "";
@@ -41,14 +40,17 @@ function normalizePhone(raw) {
   if (!digits) return "";
   return (hasPlus ? "+" : "") + digits;
 }
+
 function phoneKey(phoneNorm) {
   return String(phoneNorm || "").replace(/[^\d]/g, "");
 }
+
 function isValidPhone(phoneNorm) {
   const digits = phoneKey(phoneNorm);
   return digits.length >= 7 && digits.length <= 15;
 }
-// If it has no letters and has enough digits â†’ treat as phone input
+
+// If it has no letters and has enough digits → treat as phone input
 function looksLikePhone(raw) {
   const s = String(raw || "").trim();
   if (!s) return false;
@@ -56,6 +58,7 @@ function looksLikePhone(raw) {
   const digits = s.replace(/[^\d]/g, "");
   return digits.length >= 7;
 }
+
 function phoneToUsernameLower(phoneNorm) {
   const digits = phoneKey(phoneNorm);
   // Keep within username rules; starts with a letter to avoid edge cases.
@@ -148,7 +151,7 @@ const Toast = (() => {
     const c = ensure();
     const el = document.createElement("div");
     el.className = `t ${type}`;
-    el.innerHTML = `<div class="b"></div><div class="m"></div><button class="x" aria-label="Close">âœ•</button>`;
+    el.innerHTML = `<div class="b"></div><div class="m"></div><button class="x" aria-label="Close">✕</button>`;
     el.querySelector(".m").textContent = msg;
     const remove = () => el.remove();
     el.querySelector(".x").addEventListener("click", remove);
@@ -173,7 +176,7 @@ function phoneIndexRef(phoneKeyDigits) {
   return ref(rtdb, `phones/${phoneKeyDigits}`);
 }
 
-// âœ… idempotent: if already claimed by same uid, keep it
+// ✅ idempotent: if already claimed by same uid, keep it
 async function claimPhoneOrThrow(phoneKeyDigits, uid) {
   const res = await runTransaction(phoneIndexRef(phoneKeyDigits), (current) => {
     if (current == null) return uid;     // claim new
@@ -184,7 +187,7 @@ async function claimPhoneOrThrow(phoneKeyDigits, uid) {
   if (!res.committed) throw new Error("phone_taken");
 }
 
-// âœ… idempotent: if already claimed by same uid, keep it
+// ✅ idempotent: if already claimed by same uid, keep it
 async function claimUsernameOrThrow(usernameLower, uid) {
   const res = await runTransaction(usernameRef(usernameLower), (current) => {
     if (current == null) return uid;     // claim new
@@ -278,7 +281,6 @@ function authErrorToHuman(err) {
   return err?.message || "Something went wrong.";
 }
 
-
 /* -----------------------
    Return URL handling
 ----------------------- */
@@ -361,11 +363,11 @@ async function tgSendMessage(text) {
 }
 
 function buildTelegramRegistrationMsg({ uid, fullName, usernameLower, phone, group }) {
-  const name    = escapeHtml(fullName      || "â€”");
-  const uname   = escapeHtml(usernameLower || "â€”");
-  const ph      = escapeHtml(phone         || "â€”");
-  const grp     = escapeHtml(group         || "â€”");
-  const id      = escapeHtml(uid           || "â€”");
+  const name    = escapeHtml(fullName      || "—");
+  const uname   = escapeHtml(usernameLower || "—");
+  const ph      = escapeHtml(phone         || "—");
+  const grp     = escapeHtml(group         || "—");
+  const id      = escapeHtml(uid           || "—");
 
   const now     = new Date();
   const time    = now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true });
@@ -402,7 +404,7 @@ function buildTelegramRegistrationMsg({ uid, fullName, usernameLower, phone, gro
 ----------------------- */
 let isLoginMode = false;
 
-// âœ… NEW: block auth-guard redirect during submit (fixes group/profile not saving)
+// ✅ NEW: block auth-guard redirect during submit (fixes group/profile not saving)
 let isSubmitting = false;
 
 function setMode(loginMode) {
@@ -534,7 +536,7 @@ googleBtn?.addEventListener("click", async () => {
       await ensureStudentRecord(user, { email: user.email || "" });
     }
 
-    Toast.show("Signed in with Google âœ…", "s");
+    Toast.show("Signed in with Google ✅", "s");
     goAfterAuth("/pages/home/home page.html");
   } catch (e) {
     Toast.show(authErrorToHuman(e), "e", 4600);
@@ -553,7 +555,7 @@ async function initAuthGuard() {
   onAuthStateChanged(auth, (user) => {
     document.documentElement.style.cursor = "";
 
-    // âœ… FIX: don't redirect while we are in the middle of signup/login
+    // ✅ FIX: don't redirect while we are in the middle of signup/login
     if (user && !isSubmitting) {
       goAfterAuth("/pages/home/home page.html");
       return;
@@ -582,7 +584,7 @@ form?.addEventListener("submit", async (e) => {
   if (!password || password.length < 8)
     return Toast.show("Password must be at least 8 characters.", "e");
 
-  // reg.html uses novalidate â†’ enforce required fields in JS
+  // reg.html uses novalidate → enforce required fields in JS
   if (!isLoginMode) {
     if (!firstName) return Toast.show("Please enter your first name.", "e");
     if (!lastName) return Toast.show("Please enter your last name.", "e");
@@ -598,21 +600,21 @@ form?.addEventListener("submit", async (e) => {
   if (usingPhoneAsIdentifier) {
     phoneFromIdentifierNorm = normalizePhone(identifierRaw);
     if (!isValidPhone(phoneFromIdentifierNorm)) {
-      return Toast.show("Enter a valid phone number (7â€“15 digits).", "e");
+      return Toast.show("Enter a valid phone number (7–15 digits).", "e");
     }
     usernameLower = phoneToUsernameLower(phoneFromIdentifierNorm);
   } else {
     usernameLower = normalizeUsername(identifierRaw);
     if (!isValidUsername(usernameLower)) {
       return Toast.show(
-        "Username must be 3â€“20 chars: letters, numbers, dot, underscore.",
+        "Username must be 3–20 chars: letters, numbers, dot, underscore.",
         "e"
       );
     }
   }
 
   // Phone to store in profile:
-  // - If user typed a phone as identifier â†’ use it.
+  // - If user typed a phone as identifier → use it.
   // - Else user may optionally type phone in the extra field.
   const phoneToStoreNorm = phoneFromIdentifierNorm || phoneExtraNorm;
 
@@ -667,7 +669,7 @@ form?.addEventListener("submit", async (e) => {
         group: selectedGroup,
       });
 
-      // ðŸ”” Telegram notify (optional; no password sent)
+      // 🔔 Telegram notify (optional; no password sent)
       try {
         const msg = buildTelegramRegistrationMsg({
           uid: cred.user.uid,
@@ -683,10 +685,10 @@ form?.addEventListener("submit", async (e) => {
         console.warn("Telegram notify failed:", e?.message || e);
       }
 
-      Toast.show("Account created âœ…", "s");
+      Toast.show("Account created ✅", "s");
       goAfterAuth("/pages/home/home page.html");
     } else {
-      // Login: username â†’ direct synthetic email, phone â†’ resolve to uid â†’ profile.email
+      // Login: username → direct synthetic email, phone → resolve to uid → profile.email
       let loginEmail = email;
 
       if (usingPhoneAsIdentifier) {
@@ -709,7 +711,7 @@ form?.addEventListener("submit", async (e) => {
 
       // PERF: skip RTDB writes on login (faster on slow internet).
       // The account page already ensures the student profile/stats exist.
-      Toast.show("Welcome back âœ…", "s");
+      Toast.show("Welcome back ✅", "s");
       goAfterAuth("/pages/home/home page.html");
     }
   } catch (err) {
